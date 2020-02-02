@@ -52,6 +52,8 @@ or just run lein into your IDE
 (save! {:name "vencendo" :message "cuidado" :fk_person "1"})
 ```
 
+### test
+`lein test`
 
 
 ### Deploy flow
