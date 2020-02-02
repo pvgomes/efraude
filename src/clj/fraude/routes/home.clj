@@ -57,6 +57,9 @@
 (defn home-page [request]
   (layout/render request "home.html" (render request)))
 
+(defn termos-page [request]
+  (layout/render request "termos.html" (render request)))
+
 (defn home-routes []
   [""
    {:middleware [middleware/wrap-csrf
@@ -65,6 +68,7 @@
    ["/entrar" {:get entrar-page}]
    ["/registrar" {:get registrar-page}]
    ["/fraudes" {:get fraudes-page}]
+   ["/termos" {:get termos-page}]
    ["/person/add" {:post save-person!}]
    ["/fraud/add" {:post save-fraud!}]
    ["/login" {:post login}]

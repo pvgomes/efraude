@@ -45,3 +45,13 @@ WHERE id = :id
 -- :doc retrieves a person by e-mail
 SELECT * FROM person
 where email = :email
+
+-- :name create-relevance! :! :n
+-- :doc creates as new relevance
+INSERT INTO relevance
+(message, fk_person, fk_fraud)
+VALUES (:message, :fk_person, :fk_fraud)
+
+-- :name get-relevances :? :*
+-- :doc selects all relevances
+SELECT * from relevance
