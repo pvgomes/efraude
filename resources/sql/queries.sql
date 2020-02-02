@@ -8,6 +8,11 @@ VALUES (:name, :message, :fk_person, :url)
 -- :doc selects all available messages
 SELECT * from fraud
 
+-- :name get-fraud :? :1
+-- :doc get a fraud by id
+SELECT * FROM fraud
+WHERE id = :id
+
 -- :name save-person! :! :n
 -- :doc creates a new person using the user information
 INSERT INTO person
@@ -49,8 +54,8 @@ where email = :email
 -- :name create-relevance! :! :n
 -- :doc creates as new relevance
 INSERT INTO relevance
-(message, fk_person, fk_fraud)
-VALUES (:message, :fk_person, :fk_fraud)
+(message, fk_person, fk_fraud, type)
+VALUES (:message, :fk_person, :fk_fraud, :type)
 
 -- :name get-relevances :? :*
 -- :doc selects all relevances

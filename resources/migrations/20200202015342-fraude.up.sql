@@ -29,6 +29,7 @@ CREATE TABLE `relevance`
 `message` text NOT NULL,
 `fk_fraud` int(11) NOT NULL,
 `fk_person` int(11) NOT NULL,
+`type` ENUM('positive', 'negative'),
 `up` int(11) DEFAULT 0,
 `down` int(11) DEFAULT 0,
 `created_at` datetime DEFAULT CURRENT_TIMESTAMP,

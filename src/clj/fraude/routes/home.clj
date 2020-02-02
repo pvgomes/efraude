@@ -18,12 +18,16 @@
   (if (get-in req [:session :identity])
     (get-in req [:session :identity])))
 
-(defn render [{:keys [flash] :as request}]
+(defn render [{:keys [flash content] :as request} & [params]]
   (if (req-user request)
-    (merge {:messages (db/get-frauds)
+    (merge params
+            {:messages (db/get-frauds)
+             :content content
             :user     (req-user request)}
            (select-keys flash [:name :message :errors]))
-    (merge {:messages (db/get-frauds)}
+    (merge params
+           {:messages (db/get-frauds)
+            :content content}
            (select-keys flash [:name :message :errors]))))
 
 (defn login [{:keys [params session] :as request}]
@@ -54,6 +58,9 @@
 (defn fraudes-page [request]
   (layout/render request "fraudes.html" (render request)))
 
+(defn fraude-page [{:keys [path-params] :as request}]
+  (layout/render request "fraude.html" (render (assoc request :content (c-fraud/get-fraud path-params)))))
+
 (defn home-page [request]
   (layout/render request "home.html" (render request)))
 
@@ -69,6 +76,7 @@
    ["/registrar" {:get registrar-page}]
    ["/fraudes" {:get fraudes-page}]
    ["/termos" {:get termos-page}]
+   ["/fraude/:id/:title" {:get fraude-page}]
    ["/person/add" {:post save-person!}]
    ["/fraud/add" {:post save-fraud!}]
    ["/login" {:post login}]

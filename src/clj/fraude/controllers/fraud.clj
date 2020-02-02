@@ -7,3 +7,6 @@
                      :message message
                      :fk_person fk_person
                      :url url}))
+
+(defn get-fraud [id]
+  (db/get-fraud id))
