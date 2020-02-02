@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+​     {% block content %}
+{% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
+​ 
+<div class=​"content"​>
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <div class=​"column"​>
+                <h2 class="title">Registrar</h2>
+
+
+                <form method="POST" action="/person/add">
+                    {% csrf-field %}
+                    <div class=​"field"​>
+                        <label class=​"label"​ for=​"name"​>Nome</label>
+                        {% if errors.name %}
+                        <div class="notification is-danger">
+                            {{errors.name|join}}
+                        </div>
+                        {% endif %}
+                        <div class="control">
+                            <input type="text" id="name" class="input" name="name" value="{{name}}">
+                        </div>
+                    </div>
+                    <div class=​"field"​>
+                        <label class=​"label"​ for="message">e-mail</label>
+                        {% if errors.email %}
+                        <div class="notification is-danger">
+                            {{errors.email|join}}
+                        </div>
+                        {% endif %}
+                        <div class="control">
+                            <input type="text" id="email" name="email" class="input" value="{{email}}">
+                        </div>
+                    </div>
+                    <div class=​"field"​>
+                        <label class=​"label"​ for="message">Senha</label>
+                        <div class="control">
+                            <input type="password" id="password" name="password" class="input" value="{{password}}">
+                        </div>
+                    </div>
+                    <div class="control">
+                        <br>
+                        <button type="submit" class="button is-primary">Registrar</button>
+                        <br>
+                        <a href="/entrar">Já tem uma conta?</a>
+                    </div>
+                </form>
+
+            </div>
+             
+        </div>
+        ​ 
+    </div>
+    ​ 
+</div>
+​     {% endblock %}

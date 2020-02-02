@@ -1,0 +1,79 @@
+<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <!--            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">-->
+            <span style="font-size:20px;font-weight: bolder;">é Fraude</span>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a href="/fraudes" class="navbar-item">
+                Fraudes
+            </a>
+
+            <!--            <div class="navbar-item has-dropdown is-hoverable">-->
+            <!--                <a class="navbar-link">-->
+            <!--                    Categorias-->
+            <!--                </a>-->
+
+            <!--                <div class="navbar-dropdown">-->
+            <!--                    <a class="navbar-item">-->
+            <!--                        Pirâmide-->
+            <!--                    </a>-->
+            <!--                    <a class="navbar-item">-->
+            <!--                        Fraudes com e-commerce-->
+            <!--                    </a>-->
+            <!--                    <a class="navbar-item">-->
+            <!--                        Fraudes bancárias-->
+            <!--                    </a>-->
+            <!--                    <hr class="navbar-divider">-->
+            <!--                    <a class="navbar-item">-->
+            <!--                        Denunciar Fraude-->
+            <!--                    </a>-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                {% if user %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        <i class="fas fa-home fa-fw"></i>
+                        {{ user.name }}
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Suas denuncias
+                        </a>
+                        <a class="navbar-item">
+                            Perfil
+                        </a>
+                        <hr class="navbar-divider">
+                        <a href="/logout" class="navbar-item">
+                            Sair
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="buttons">
+                    <a href="/registrar" class="button is-primary">
+                        <strong>Registrar</strong>
+                    </a>
+                    <a href="/entrar" class="button is-light">
+                        Entrar
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

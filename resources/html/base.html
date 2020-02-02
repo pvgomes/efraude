@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to fraude</title>
+
+    <!-- styles -->
+    {% style "/assets/bulma/css/bulma.min.css" %}
+    {% style "/assets/material-icons/css/material-icons.min.css" %}
+
+    {% style "/css/screen.css" %}
+  </head>
+  <body>
+  {% block content %}
+  {% endblock %}
+
+    <!-- scripts -->
+    <script type="text/javascript">
+      (function() {
+        var burger = document.querySelector('.burger');
+        var nav = document.querySelector('#'+burger.dataset.target);
+        burger.addEventListener('click', function(){
+          burger.classList.toggle('is-active');
+          nav.classList.toggle('is-active');
+        });
+      })();
+    </script>
+
+    
+    {% block page-scripts %}
+    {% endblock %}
+  {% include "partial/footer.html" with name="Jane Doe" greeting="Hello!" %}
+  </body>
+</html>

@@ -1,0 +1,46 @@
+version: "3"
+
+networks:
+  fraude-network:
+    driver: overlay
+    driver_opts:
+      encrypted: 'true'
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+
+services:
+  redis:
+    image: redis:3.0
+    ports:
+      - "6379"
+    networks:
+      - fraude-network
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - "fraude-mysql:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=toeco190
+    networks:
+      - fraude-network
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  fraude-network:
+
+volumes:
+  fraude-mysql:
+
