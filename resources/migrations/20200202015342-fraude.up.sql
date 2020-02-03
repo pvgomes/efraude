@@ -19,7 +19,7 @@ CREATE TABLE `fraud`
 `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
 `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (`id`),
-CONSTRAINT `pac_customer_FK_1` FOREIGN KEY (fk_person) REFERENCES person(id)
+CONSTRAINT `fraud_FK_1` FOREIGN KEY (fk_person) REFERENCES person(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 --;;
@@ -35,6 +35,7 @@ CREATE TABLE `relevance`
 `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
 `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (`id`),
-CONSTRAINT `pac_customer_FK_1` FOREIGN KEY (fk_person) REFERENCES person(id)
+CONSTRAINT `relevance_FK_1` FOREIGN KEY (fk_person) REFERENCES person(id),
+CONSTRAINT `relevance_FK_2` FOREIGN KEY (fk_fraud) REFERENCES fraud(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

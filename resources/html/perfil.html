@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+​     {% block content %}
+{% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
+​ 
+<div class=​"content"​>
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <div class=​"column"​>
+                <h2 class="title">Perfil</h2>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>nome</th>
+                        <td>{{ user.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>e-mail</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>usuário desde</th>
+                        <td>{{user.created_at|date:"dd/MM/yyyy"}}</td>
+                    </tr>
+                    </ul>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        ​ 
+    </div>
+    ​ 
+</div>
+​     {% endblock %}
+
+

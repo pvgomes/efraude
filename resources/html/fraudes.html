@@ -2,78 +2,28 @@
 ​{% block content %}
 {% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
 <section class="section">
+
     <div class="container">
-        <div class="container">
-            {% if user %}
-            <div class="notification">
-                <h1> Registro de fraude </h1>
-                <br>
-                <form method="POST" action="/fraud/add">
-                    {% csrf-field %}
-                    <div class=​"field"​>
-                        <label class=​"label"​ for=​"name"​>Título da Fraude
-                            <br> (eg: e-mail pedindo cartão)</label>
-                        {% if errors.name %}
-                        <div class="notification is-danger">
-                            {{errors.name|join}}
-                        </div>
-                        {% endif %}
-                        <div class="control">
-                            <input type="text" id="name" class="input" name="name" value="{{name}}">
-                        </div>
-                    </div>
-                    <div class=​"field"​>
-                        <label class=​"label"​ for="message">Explique sobre a fraude</label>
-                        {% if errors.message %}
-                        <div class="notification is-danger">
-                            {{errors.message|join}}
-                        </div>
-                        {% endif %}
-                        <textarea class="textarea" name="message" id="message">{{message}}</textarea>
-                    </div>
-                    <div class=​"field"​>
-                        <label class=​"label"​ for=​"name"​>Url?
-                            <br> (eg: caso tenha url da fraude)</label>
-                        {% if errors.url %}
-                        <div class="notification is-danger">
-                            {{errors.url|join}}
-                        </div>
-                        {% endif %}
-                        <div class="control">
-                            <input type="text" id="url" class="input" name="url" value="{{url}}">
-                        </div>
-                    </div>
-
-                    <input type="hidden" id="fk_person" name="fk_person" class="input"
-                           value="{{ user.id }}">
-
-                    <div class="control">
-                        <br>
-                        <button type="submit" class="button is-primary">Registrar</button>
-                    </div>
-                </form>
-            </div>
-            {% endif %}
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th><abbr title="Position">última atualização</abbr></th>
-                    <th>fraude</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in messages %}
-                <tr>
-                    <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
-                    <td><a href="#" title="{{item.name}}">{{item.name}}</a></td>
-                </tr>
-                {% endfor %} ​ 
-                </ul>
-                </tbody>
-            </table>
-
-        </div>
+        <p>
+        <table class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>última atualização</th>
+                <th>fraude</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in messages %}
+            <tr>
+                <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
+                <td><a href="/fraude/{{item.id}}/{{item.name}}" title="{{item.name}}">{{item.name}}</a></td>
+            </tr>
+            {% endfor %} ​ 
+            </ul>
+            </tbody>
+        </table>
+        </p>
     </div>
+
 </section>
 ​{% endblock %}

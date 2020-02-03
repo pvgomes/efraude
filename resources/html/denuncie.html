@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+​{% block content %}
+{% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
+<section class="section">
+    <div class="container">
+        <div class="container">
+            {% if user %}
+            <div class="notification">
+                <h1> Registro de fraude </h1>
+                <br>
+                <form method="POST" action="/fraud/add">
+                    {% csrf-field %}
+                    <div class=​"field"​>
+                        <label class=​"label"​ for=​"name"​>Título da Fraude
+                            <br> (eg: e-mail pedindo cartão)</label>
+                        {% if errors.name %}
+                        <div class="notification is-danger">
+                            {{errors.name|join}}
+                        </div>
+                        {% endif %}
+                        <div class="control">
+                            <input type="text" id="name" class="input" name="name" value="{{name}}">
+                        </div>
+                    </div>
+                    <div class=​"field"​>
+                        <label class=​"label"​ for="message">Explique sobre a fraude</label>
+                        {% if errors.message %}
+                        <div class="notification is-danger">
+                            {{errors.message|join}}
+                        </div>
+                        {% endif %}
+                        <textarea class="textarea" name="message" id="message">{{message}}</textarea>
+                    </div>
+                    <div class=​"field"​>
+                        <label class=​"label"​ for=​"name"​>Url?
+                            <br> (eg: caso tenha url da fraude)</label>
+                        {% if errors.url %}
+                        <div class="notification is-danger">
+                            {{errors.url|join}}
+                        </div>
+                        {% endif %}
+                        <div class="control">
+                            <input type="text" id="url" class="input" name="url" value="{{url}}">
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="fk_person" name="fk_person" class="input"
+                           value="{{ user.id }}">
+
+                    <div class="control">
+                        <br>
+                        <button type="submit" class="button is-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            quer denunciar uma fraude?
+                        </h1>
+                        <h2 class="subtitle">
+                            faça seu cadastro, não leva 30 segundos
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <div class="buttons">
+                <a href="/registrar" class="button is-primary">
+                    <strong>Registrar</strong>
+                </a>
+                <a href="/entrar" class="button is-light">
+                    Entrar
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+​{% endblock %}

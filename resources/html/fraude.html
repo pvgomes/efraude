@@ -35,28 +35,28 @@
 
 
                             <div class="buttons">
-                                <button class="button">
-                                    <span class="icon">
-                                      <i class="fas fa-reply"></i>
-                                    </span>
-                                    <span>comentar</span>
-                                </button>
+                                {% csrf-field %}
 
-                                <button class="button">
+<!--                                <button class="button">-->
+<!--                                    <span class="icon">-->
+<!--                                      <i class="fas fa-reply"></i>-->
+<!--                                    </span>-->
+<!--                                    <span>comentar</span>-->
+<!--                                </button>-->
+
+                                <button class="button" onclick="fraudUp({{ content.id }})">
                                     <span class="icon">
                                       <i class="fas fa-thumbs-up"></i>
                                     </span>
                                     <span>é fraude</span>
                                 </button>
 
-                                <button class="button">
+                                <button class="button" onclick="fraudDown({{ content.id }})">
                                     <span class="icon">
                                       <i class="fas fa-thumbs-down"></i>
                                     </span>
                                     <span>não é fraude</span>
                                 </button>
-
-
                             </div>
                         </nav>
                     </div>
@@ -66,4 +66,6 @@
         </div>
     </div>
 </section>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% script "/js/fraud.js" %}
 ​{% endblock %}

@@ -4,6 +4,7 @@
     [fraude.db.core :as db]
     [fraude.controllers.person :as c-person]
     [fraude.controllers.fraud :as c-fraud]
+    [fraude.controllers.relevance :as c-relevance]
     [fraude.middleware :as middleware]
     [ring.util.response :as res]
     [ring.util.http-response :as response]
@@ -49,6 +50,16 @@
   (c-fraud/save! params)
   (response/found "/"))
 
+(defn relevance-up! [{:keys [params] :as request}]
+  (let [user (req-user request)]
+    (c-relevance/save! (:id user) (:id params) "positive"))
+  (layout/response-raw))
+
+(defn relevance-down! [{:keys [params] :as request}]
+  (let [user (req-user request)]
+    (c-relevance/save! (:id user) (:id params) "negative"))
+  (layout/response-raw))
+
 (defn entrar-page [request]
   (layout/render request "entrar.html" (render request)))
 
@@ -57,6 +68,9 @@
 
 (defn fraudes-page [request]
   (layout/render request "fraudes.html" (render request)))
+
+(defn denuncie-page [request]
+  (layout/render request "denuncie.html" (render request)))
 
 (defn fraude-page [{:keys [path-params] :as request}]
   (layout/render request "fraude.html" (render (assoc request :content (c-fraud/get-fraud path-params)))))
@@ -67,6 +81,12 @@
 (defn termos-page [request]
   (layout/render request "termos.html" (render request)))
 
+(defn denuncias-page [request]
+  (layout/render request "denuncias.html" (render request)))
+
+(defn perfil-page [request]
+  (layout/render request "perfil.html" (render request)))
+
 (defn home-routes []
   [""
    {:middleware [middleware/wrap-csrf
@@ -75,9 +95,14 @@
    ["/entrar" {:get entrar-page}]
    ["/registrar" {:get registrar-page}]
    ["/fraudes" {:get fraudes-page}]
+   ["/denuncie" {:get denuncie-page}]
    ["/termos" {:get termos-page}]
+   ["/suas-denuncias" {:get denuncias-page}]
+   ["/perfil" {:get perfil-page}]
    ["/fraude/:id/:title" {:get fraude-page}]
    ["/person/add" {:post save-person!}]
    ["/fraud/add" {:post save-fraud!}]
+   ["/fraud/up" {:post relevance-up!}]
+   ["/fraud/down" {:post relevance-down!}]
    ["/login" {:post login}]
    ["/logout" {:get logout}]])
