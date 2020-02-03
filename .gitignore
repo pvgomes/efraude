@@ -16,3 +16,4 @@ profiles.clj
 /log
 .idea/*
 idea*
+*.DS_Store
