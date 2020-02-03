@@ -3,33 +3,31 @@
 {% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
 ​ 
 <div class=​"content"​>
-    <div class="columns is-centered">
-        <div class="column is-two-thirds">
-            <div class=​"column"​>
-                <h2 class="title">Entrar</h2>
-
-
-                <form action="/login" method="POST">{% csrf-field %}
-                    <div class="field">
-                        <div class="control">
-                            <input type="text" class="input" placeholder="e-mail" name="email" required/>
-                        </div>
+    <div class="columns">
+        <div class="column is-full">
+            <section class="hero">
+                <div class="hero-body">
+                    <h2 class="title">Entrar</h2>
+                    <div class="container">
+                        <form action="/login" method="POST">{% csrf-field %}
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="e-mail" name="email" required/>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input type="password" class="input" placeholder="password" name="password"
+                                           pattern=".{2,20}" required/>
+                                </div>
+                            </div>
+                            <button class="button auth__button">Entrar</button>
+                            <a href="/registrar" class="button auth__button">Registrar</a>
+                        </form>
                     </div>
-                    <div class="field">
-                        <div class="control">
-                            <input type="password" class="input" placeholder="password" name="password"
-                                   pattern=".{2,20}" required/>
-                        </div>
-                    </div>
-                    <button class="button auth__button">Entrar</button>
-                    <a href="/registrar" class="button auth__button">Registrar</a>
-                </form>
-
-            </div>
-             
+                </div>
+            </section>
         </div>
-        ​ 
     </div>
-    ​ 
 </div>
 ​     {% endblock %}
