@@ -61,6 +61,9 @@ or just run lein into your IDE
 generate jar
 `lein uberjar`
 
+sync .jar
+`scp ./target/uberjar/fraude-0.1.0-SNAPSHOT.jar root@104.236.125.208:/home/pvgomes/`
+
 
 export env vars
 `export DATABASE_URL="jdbc:mysql://root:toeco190@0.0.0.0:3306/fraude"`
@@ -68,3 +71,7 @@ export env vars
 run
 `java -jar target/uberjar/fraude.jar`
 
+
+
+java -version
+openjdk version "1.8.0_232"
