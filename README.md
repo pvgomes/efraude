@@ -39,9 +39,9 @@ or just run lein into your IDE
 
 ### REPL test user creation/login
 ```clojure
-(in-ns 'fraude.auth)
+(in-ns 'fraude.controllers.person)
 ;should return 1
-(create-person! "joao" "jsilva@gmail.com" "123")
+(create! "joao" "jsilva@gmail.com" "123")
 ;should return a array map with person data
 (authenticate-person "jsilva@gmail.com" "123")
 ```

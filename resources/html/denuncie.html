@@ -6,13 +6,16 @@
         <div class="container">
             {% if user %}
             <div class="notification">
-                <h1> Registro de fraude </h1>
+                <h1> <strong>Registro de fraude</strong> </h1>
                 <br>
                 <form method="POST" action="/fraud/add">
                     {% csrf-field %}
                     <div class=​"field"​>
-                        <label class=​"label"​ for=​"name"​>Título da Fraude
-                            <br> (eg: e-mail pedindo cartão)</label>
+                        <label class=​"label"​ for=​"name"​>
+                            <strong>Título da Fraude</strong>
+                            <br>
+                            <span>(ex: e-mail pedindo cartão)</span>
+                        </label>
                         {% if errors.name %}
                         <div class="notification is-danger">
                             {{errors.name|join}}
@@ -22,8 +25,10 @@
                             <input type="text" id="name" class="input" name="name" value="{{name}}">
                         </div>
                     </div>
+                    <br>
                     <div class=​"field"​>
-                        <label class=​"label"​ for="message">Explique sobre a fraude</label>
+                        <label class=​"label"​ for="message">
+                            <strong>Explique sobre a fraude</strong></label>
                         {% if errors.message %}
                         <div class="notification is-danger">
                             {{errors.message|join}}
@@ -31,9 +36,23 @@
                         {% endif %}
                         <textarea class="textarea" name="message" id="message">{{message}}</textarea>
                     </div>
+                    <br>
                     <div class=​"field"​>
-                        <label class=​"label"​ for=​"name"​>Url?
-                            <br> (eg: caso tenha url da fraude)</label>
+                        <label class=​"label"​ for="message">
+                            <strong>Cautelas para evitar cair na fraude</strong>
+                        </label>
+                        {% if errors.caution %}
+                        <div class="notification is-danger">
+                            {{errors.caution|join}}
+                        </div>
+                        {% endif %}
+                        <textarea class="textarea" name="caution" id="caution">{{caution}}</textarea>
+                    </div>
+                    <br>
+                    <div class=​"field"​>
+                        <label class=​"label"​ for=​"name"​>
+                            <strong>Url</strong>
+                            <br> (ex: caso tenha url da fraude)</label>
                         {% if errors.url %}
                         <div class="notification is-danger">
                             {{errors.url|join}}

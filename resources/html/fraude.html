@@ -22,8 +22,21 @@
                                 <br>
                                 {{ content.message }}
                                 <br>
+                                {% if content.caution %}
+                                <br>
+                                <strong>Cautelas </strong>
+                                <section>
+                                    {{ content.caution }}
+                                </section>
+                                {% endif %}
+                                <br>
+                                {% if content.url %}
                                 <strong>Site: </strong><a href="{{ content.url }}"> {{ content.url }} </a>
                                 <br>
+                                {% endif %}
+
+
+
                                 <strong>chances de ser fraude: </strong>
 
                                 <span class="tag is-danger">Alta</span>
@@ -33,10 +46,9 @@
 
 
 
-
+                            {% if user %}
                             <div class="buttons">
                                 {% csrf-field %}
-
 <!--                                <button class="button">-->
 <!--                                    <span class="icon">-->
 <!--                                      <i class="fas fa-reply"></i>-->
@@ -58,6 +70,8 @@
                                     <span>não é fraude</span>
                                 </button>
                             </div>
+                            {% endif %}
+
                         </nav>
                     </div>
                 </article>

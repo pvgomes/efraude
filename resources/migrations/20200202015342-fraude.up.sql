@@ -3,8 +3,8 @@ CREATE TABLE `person`
 `name` varchar(100) DEFAULT NULL,
 `email` varchar(500) NOT NULL,
 `password` varchar(100) NOT NULL,
-`created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-`updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+`created_at` datetime DEFAULT NULL,
+`updated_at` datetime DEFAULT NULL,
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -14,10 +14,11 @@ CREATE TABLE `fraud`
 (`id` int(11) NOT NULL AUTO_INCREMENT,
 `name` varchar(30) NOT NULL,
 `message` text NOT NULL,
+`caution` text DEFAULT NULL,
 `url` varchar(2048),
 `fk_person` int(11) NOT NULL,
-`created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-`updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+`created_at` datetime DEFAULT NULL,
+`updated_at` datetime DEFAULT NULL,
 PRIMARY KEY (`id`),
 CONSTRAINT `fraud_FK_1` FOREIGN KEY (fk_person) REFERENCES person(id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -32,8 +33,8 @@ CREATE TABLE `relevance`
 `type` ENUM('positive', 'negative'),
 `up` int(11) DEFAULT 0,
 `down` int(11) DEFAULT 0,
-`created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-`updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+`created_at` datetime DEFAULT NULL,
+`updated_at` datetime DEFAULT NULL,
 PRIMARY KEY (`id`),
 CONSTRAINT `relevance_FK_1` FOREIGN KEY (fk_person) REFERENCES person(id),
 CONSTRAINT `relevance_FK_2` FOREIGN KEY (fk_fraud) REFERENCES fraud(id)
