@@ -65,7 +65,7 @@
   (layout/render request "registrar.html" (render request)))
 
 (defn fraudes-page [request]
-  (layout/render request "fraudes.html" (render request)))
+  (layout/render request "fraudes.html" (render (assoc request :content (c-fraud/all)))))
 
 (defn denuncie-page [request]
   (layout/render request "denuncie.html" (render request)))
@@ -80,7 +80,10 @@
   (layout/render request "termos.html" (render request)))
 
 (defn denuncias-page [request]
-  (layout/render request "denuncias.html" (render request)))
+  (layout/render request "denuncias.html"
+                 (render request
+                         (assoc request :content
+                                        (c-fraud/by-person (req-user request))))))
 
 (defn perfil-page [request]
   (layout/render request "perfil.html" (render request)))

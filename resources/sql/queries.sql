@@ -21,6 +21,12 @@ limit :fraud_limit
 SELECT * FROM fraud
 WHERE id = :id
 
+-- :name frauds-by-person :? :*
+-- :doc get frauds by person
+SELECT * from fraud
+WHERE fk_person = :fk_person
+order by updated_at desc
+
 -- :name save-person! :! :n
 -- :doc creates a new person using the user information
 INSERT INTO person

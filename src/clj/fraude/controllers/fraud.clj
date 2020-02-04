@@ -15,3 +15,9 @@
 (defn dashboard []
   {:last (db/get-frauds {:fraud_limit 5})
    :top (db/get-frauds-asc {:fraud_limit 5})})
+
+(defn all []
+  (db/get-frauds {:fraud_limit 200}))
+
+(defn by-person [{:keys [id]}]
+  (db/frauds-by-person {:fk_person id}))
