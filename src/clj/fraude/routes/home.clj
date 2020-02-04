@@ -22,13 +22,11 @@
 (defn render [{:keys [flash content] :as request} & [params]]
   (if (req-user request)
     (merge params
-            {:messages (db/get-frauds)
-             :content content
+            {:content content
             :user     (req-user request)}
            (select-keys flash [:name :message :errors]))
     (merge params
-           {:messages (db/get-frauds)
-            :content content}
+           {:content content}
            (select-keys flash [:name :message :errors]))))
 
 (defn login [{:keys [params session] :as request}]
@@ -76,7 +74,7 @@
   (layout/render request "fraude.html" (render (assoc request :content (c-fraud/get-fraud path-params)))))
 
 (defn home-page [request]
-  (layout/render request "home.html" (render request)))
+  (layout/render request "home.html" (render (assoc request :content (c-fraud/dashboard)))))
 
 (defn termos-page [request]
   (layout/render request "termos.html" (render request)))

@@ -6,7 +6,15 @@ VALUES (:name, :message, :caution, :fk_person, :url, now(), now())
 
 -- :name get-frauds :? :*
 -- :doc selects all available messages
-SELECT * from fraud
+select * from fraud
+order by updated_at desc
+limit :fraud_limit
+
+-- :name get-frauds-asc :? :*
+-- :doc selects all available messages
+select * from fraud
+order by updated_at asc
+limit :fraud_limit
 
 -- :name get-fraud :? :1
 -- :doc get a fraud by id
@@ -60,3 +68,10 @@ VALUES (:message, :fk_person, :fk_fraud, :type, now(), now())
 -- :name get-relevances :? :*
 -- :doc selects all relevances
 SELECT * from relevance
+
+-- :name count-relevance :? :1
+-- :doc count relevance by type and fraud id
+select count(relevance.id)
+from relevance
+where relevance.fk_fraud = :fraud_id
+and relevance.type = :type

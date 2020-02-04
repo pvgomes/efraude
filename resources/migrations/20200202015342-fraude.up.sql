@@ -12,7 +12,7 @@ PRIMARY KEY (`id`)
 
 CREATE TABLE `fraud`
 (`id` int(11) NOT NULL AUTO_INCREMENT,
-`name` varchar(30) NOT NULL,
+`name` varchar(200) NOT NULL,
 `message` text NOT NULL,
 `caution` text DEFAULT NULL,
 `url` varchar(2048),

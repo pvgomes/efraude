@@ -11,3 +11,7 @@
 
 (defn get-fraud [id]
   (db/get-fraud id))
+
+(defn dashboard []
+  {:last (db/get-frauds {:fraud_limit 5})
+   :top (db/get-frauds-asc {:fraud_limit 5})})

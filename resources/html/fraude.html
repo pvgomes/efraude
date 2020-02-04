@@ -43,9 +43,7 @@
                             </p>
                         </div>
                         <nav class="level is-mobile">
-
-
-
+                            
                             {% if user %}
                             <div class="buttons">
                                 {% csrf-field %}
@@ -76,7 +74,7 @@
                     </div>
                 </article>
             </div>
-
+            <div class="fb-comments" data-href="https://efraude.app/{{ content.id }}/{{content.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" data-width="" data-numposts="5"></div>
         </div>
     </div>
 </section>
