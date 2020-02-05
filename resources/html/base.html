@@ -49,5 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {% block page-scripts %}
     {% endblock %}
   {% include "partial/footer.html" with name="Jane Doe" greeting="Hello!" %}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  {% script "/js/global.js" %}
   </body>
 </html>
