@@ -36,13 +36,17 @@
       (do (let [updated-session (assoc session :identity person)]
             (-> (response/found "/")
                 (assoc :session updated-session))))
-      (layout/error-page {:status  200
-                          :title   "User doesn't exist"
-                          :message "This user doesn't exist"}))))
+      (layout/render request "entrar.html"
+                     (render
+                       (assoc request :flash
+                                      (assoc params :errors {:login "usuário ou senha inválidos"})))))))
 
-(defn save-person! [{:keys [params]}]
+(defn save-person! [{:keys [params] :as request}]
   (c-person/save! params)
-  (response/found "/entrar"))
+  (layout/render request "entrar.html"
+                 (render
+                   (assoc request :flash
+                                  (assoc params :errors {:message "usuário cadastrado"})))))
 
 (defn save-fraud! [{:keys [params]}]
   (c-fraud/save! params)
@@ -81,9 +85,8 @@
 
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
-                 (render request
-                         (assoc request :content
-                                        (c-fraud/by-person (req-user request))))))
+                 (render (assoc request :content
+                                        (c-fraud/by-person (:id (req-user request)))))))
 
 (defn perfil-page [request]
   (layout/render request "perfil.html" (render request)))

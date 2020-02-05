@@ -7,8 +7,8 @@
         <div class="column is-full">
             <section class="hero">
                 <div class="hero-body">
-                    <h2 class="title">Entrar</h2>
                     <div class="container">
+                        <h2 class="title">Entrar</h2>
                         <form action="/login" method="POST">{% csrf-field %}
                             <div class="field">
                                 <div class="control">
@@ -21,6 +21,17 @@
                                            pattern=".{2,20}" required/>
                                 </div>
                             </div>
+                            {% if errors.login %}
+                            <div class="notification is-danger">
+                                {{errors.login|join}}
+                            </div>
+                            {% endif %}
+                            {% if errors.message %}
+                            <div class="notification is-success">
+                                {{errors.message|join}}
+                            </div>
+                            {% endif %}
+
                             <button class="button auth__button">Entrar</button>
                             <a href="/registrar" class="button auth__button">Registrar</a>
                         </form>

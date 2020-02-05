@@ -19,5 +19,5 @@
 (defn all []
   (db/get-frauds {:fraud_limit 200}))
 
-(defn by-person [{:keys [id]}]
+(defn by-person [id]
   (db/frauds-by-person {:fk_person id}))
