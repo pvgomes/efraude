@@ -10,7 +10,11 @@
                      :url url}))
 
 (defn get-fraud [id]
-  (db/get-fraud id))
+  (let [fraud (db/get-fraud id)
+        fraud-name (:name fraud)
+        meta {:description (str "fraude reportada " fraud-name)
+              :title (str "risco de fraude " fraud-name)}]
+             (assoc fraud :meta meta)))
 
 (defn dashboard []
   {:last (db/get-frauds {:fraud_limit 5})

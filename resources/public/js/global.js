@@ -40,13 +40,8 @@ function ajcall(id) {
   });
 }
 
-
 var getCookie = function (name) {
 	var value = "; " + document.cookie;
 	var parts = value.split("; " + name + "=");
 	if (parts.length == 2) return parts.pop().split(";").shift();
 };
-
-console.log(getCookie('ring-session'));
-
-setTimeout(function(){ alert(getCookie('ring-session')); }, 3000);

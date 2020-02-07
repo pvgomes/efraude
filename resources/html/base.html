@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>é Fraude - juntos protegendo a sociedade de crimes e fraudes</title>
-
+    {% if content.meta %}
+      <title>{{ content.meta.title }} | é Fraude, juntos protegendo a sociedade de crimes e fraudes</title>
+      <meta name="description" content="{{ content.meta.description }}">
+    {% else %}
+      <title>é Fraude, juntos protegendo a sociedade de crimes e fraudes</title>
+      <meta name="description" content="éfraude.app um app que busca identificar golpes e fraudes de maneira descentralizada onde a sociedade se ajuda a acabar com os crimes de fraude no Brasil">
+    {% endif %}
     <!-- styles -->
     {% style "/assets/bulma/css/bulma.min.css" %}
     {% style "/assets/material-icons/css/material-icons.min.css" %}
@@ -21,7 +26,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- End Google Tag Manager -->
 
     <meta name="robots" content="index, follow"/>
-    <meta name="description" content="golpes e fraudes o é fraude te ajuda a se proteger disso com informação">
   </head>
   <body>
   <!-- Google Tag Manager (noscript) -->

@@ -2,78 +2,59 @@
 ​{% block content %}
 {% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
 <div class="container">
-    <div class="columns">
-        <div class="column is-full">
-            <section class="hero">
-                <div class="hero-body">
-                    <div class="container">
-                        <h1 class="title">
-                            é fraude?
-                        </h1>
-                        <h2 class="subtitle">
-                            Esse site é feito para difundir informação às pessoas,
-                            concentrando o maior número de golpes e fraudes que estão sendo feitos e criados a cada dia,
-                            evitando assim que as pessoas, diante da informação coletada, virem potenciais vítimas e
-                            tenham prejuízo financeiro.
-                        </h2>
-                    </div>
-                </div>
-            </section>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    é fraude?
+                </h1>
+                <h2 class="subtitle">
+                    Esse site é feito para difundir informação às pessoas,
+                    concentrando o maior número de golpes e fraudes que estão sendo feitos e criados a cada dia,
+                    evitando assim que as pessoas, diante da informação coletada, virem potenciais vítimas e
+                    tenham prejuízo financeiro.
+                </h2>
+            </div>
         </div>
-    </div>
-
+    </section>
     <section>
         <div class="columns is-variable is-5-mobile is-2-tablet is-3-desktop is-8-widescreen is-2-fullhd">
             <div class="column">
-                <div class="container">
-                    <p>
-                    <h2>últimas</h2>
-                    <table class="table is-fullwidth">
-                        <thead>
-                        <tr>
-                            <th>última atualização</th>
-                            <th>fraude</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in content.last %}
-                        <tr>
-                            <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
-                            <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
-                        </tr>
-                        {% endfor %} ​ 
-                        </ul>
-                        </tbody>
-                    </table>
-                    </p>
-                </div>
+                <table class="table is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th colspan="2">últimas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in content.last %}
+                    <tr>
+                        <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
+                        <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
+                    </tr>
+                    {% endfor %} ​ 
+                    </ul>
+                    </tbody>
+                </table>
             </div>
             <div class="column">
-
-                <div class="container">
-                    <p>
-                    <h2>relevantes do momento</h2>
-                    <table class="table is-fullwidth">
-                        <thead>
-                        <tr>
-                            <th>última atualização</th>
-                            <th>fraude</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in content.top %}
-                        <tr>
-                            <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
-                            <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
-                        </tr>
-                        {% endfor %} ​ 
-                        </ul>
-                        </tbody>
-                    </table>
-                    </p>
-                </div>
+                <table class="table is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th colspan="2">relevantes do momento</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in content.top %}
+                    <tr>
+                        <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
+                        <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
+                    </tr>
+                    {% endfor %} ​ 
+                    </ul>
+                    </tbody>
+                </table>
             </div>
-
         </div>
     </section>
 </div>

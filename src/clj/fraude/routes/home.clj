@@ -75,7 +75,10 @@
   (layout/render request "denuncie.html" (render request)))
 
 (defn fraude-page [{:keys [path-params] :as request}]
-  (layout/render request "fraude.html" (render (assoc request :content (c-fraud/get-fraud path-params)))))
+  (->> (c-fraud/get-fraud path-params)
+       (assoc request :content)
+       (render)
+       (layout/render request "fraude.html")))
 
 (defn home-page [request]
   (layout/render request "home.html" (render (assoc request :content (c-fraud/dashboard)))))
