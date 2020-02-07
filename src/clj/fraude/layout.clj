@@ -44,3 +44,10 @@
   {:status  (:status 200)
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body    "verde"})
+
+(defn response-xml
+  "response xml"
+  [content]
+  {:status  (:status 200)
+   :headers {"Content-Type" "text/xml; charset=UTF-8"}
+   :body    content})

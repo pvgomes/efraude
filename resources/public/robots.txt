@@ -1,0 +1,4 @@
+# efraude.app
+Sitemap: https://efraud.app/sitemap/siteindex.xml
+User-agent: *
+Disallow:

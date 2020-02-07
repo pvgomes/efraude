@@ -62,6 +62,30 @@
     (c-relevance/save! (:id user) (:id params) "negative"))
   (layout/response-raw))
 
+(defn sitemap [request]
+  (layout/response-xml "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">
+  <url>
+   <loc>https://efraude.app/</loc>
+   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
+   <priority>1</priority>
+  </url>
+  <url>
+   <loc>https://efraude.app/termos</loc>
+   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
+   <priority>1</priority>
+  </url>
+  <url>
+   <loc>https://efraude.app/fraude/8/fraudedoleilofalso</loc>
+   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
+   <priority>1</priority>
+  </url>
+  <url>
+   <loc>https://efraude.app/fraude/8/fraudedoleilofalso</loc>
+   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
+   <priority>1</priority>
+  </url>
+  </urlset>"))
+
 (defn entrar-page [request]
   (layout/render request "entrar.html" (render request)))
 
@@ -99,6 +123,7 @@
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
    ["/" {:get home-page}]
+   ["/sitemap" {:get sitemap}]
    ["/entrar" {:get entrar-page}]
    ["/registrar" {:get registrar-page}]
    ["/fraudes" {:get fraudes-page}]
