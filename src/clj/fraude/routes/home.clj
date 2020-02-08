@@ -95,6 +95,9 @@
 (defn fraudes-page [request]
   (layout/render request "fraudes.html" (render (assoc request :content (c-fraud/all)))))
 
+(defn noticias-page [request]
+  (layout/render request "noticias.html" (render request)))
+
 (defn denuncie-page [request]
   (layout/render request "denuncie.html" (render request)))
 
@@ -127,6 +130,7 @@
    ["/entrar" {:get entrar-page}]
    ["/registrar" {:get registrar-page}]
    ["/fraudes" {:get fraudes-page}]
+   ["/noticias" {:get noticias-page}]
    ["/denuncie" {:get denuncie-page}]
    ["/termos" {:get termos-page}]
    ["/suas-denuncias" {:get denuncias-page}]

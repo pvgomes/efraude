@@ -20,13 +20,13 @@
                                 <strong>{{ content.name }}</strong><br>
                                 <small>{{content.updated_at|date:"dd/MM/yyyy"}}</small>
                                 <br>
-                                {{ content.message }}
+                                {{ content.message|safe }}
                                 <br>
                                 {% if content.caution %}
                                 <br>
                                 <strong>Cautelas </strong>
                                 <section>
-                                    {{ content.caution }}
+                                    {{ content.caution|safe }}
                                 </section>
                                 {% endif %}
                                 <br>
