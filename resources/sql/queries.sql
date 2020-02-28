@@ -27,44 +27,6 @@ SELECT * from fraud
 WHERE fk_person = :fk_person
 order by updated_at desc
 
--- :name save-person! :! :n
--- :doc creates a new person using the user information
-INSERT INTO person
-  (name, email, password, created_at, updated_at)
-VALUES (:name, :email, :password, now(), now())
-
--- :name create-person!* :! :n
--- :doc creates a new person using the user information
-INSERT INTO person
-(name, email, password, created_at, updated_at)
-VALUES (:name, :email, :password, now(), now())
-
--- :name get-person-for-auth* :? :1
--- :doc selects a person for authentication
-SELECT * FROM person
-WHERE email = :email
-
-
--- :name get-persons :? :*
--- :doc selects all persons
-SELECT * from person
-
--- :name update-person! :! :n
--- :doc updates an existing person record
-UPDATE person
-SET name = :name, email = :email
-WHERE id = :id
-
--- :name get-person :? :1
--- :doc retrieves a person record given the id
-SELECT * FROM person
-WHERE id = :id
-
--- :name person-by-email :? :1
--- :doc retrieves a person by e-mail
-SELECT * FROM person
-where email = :email
-
 -- :name create-relevance! :! :n
 -- :doc creates as new relevance
 INSERT INTO relevance
@@ -74,6 +36,23 @@ VALUES (:message, :fk_person, :fk_fraud, :type, now(), now())
 -- :name get-relevances :? :*
 -- :doc selects all relevances
 SELECT * from relevance
+
+-- :name get-relevance-by-vote :? :*
+-- :doc get relevance by voter and type
+SELECT * from relevance
+WHERE fk_person = :fk_person
+AND type = :type
+AND fk_fraud = :fk_fraud
+
+-- :name get-top-frauds :? :*
+-- :doc get top frauds by type and limit
+select f.id, f.name, count(f.id) from fraud as f
+  inner join relevance as r
+    on f.id = r.fk_fraud
+where r.type = :type
+group by f.id
+order by count(f.id) desc
+limit :limit;
 
 -- :name count-relevance :? :1
 -- :doc count relevance by type and fraud id

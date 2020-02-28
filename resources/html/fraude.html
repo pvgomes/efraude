@@ -68,6 +68,14 @@
                                     <span>não é fraude</span>
                                 </button>
                             </div>
+                            {% else %}
+
+                            <div class="notification">
+                                <button class="delete"></button>
+                                As chances de isso ser uma fraude é baseada nos votos dos nossos usuários
+                                Para votar é preciso <a href="/entrar">entrar</a>
+                            </div>
+
                             {% endif %}
 
                         </nav>

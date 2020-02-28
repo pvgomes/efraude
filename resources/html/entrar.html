@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 ​     {% block content %}
 {% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
-​ 
+​ <style>
+    span[id^=not_signed_]:before {
+  content: 'entrar com google';
+  padding-right:20px;
+}
+</style>
 <div class=​"content"​>
     <div class="columns">
         <div class="column is-full">
@@ -35,10 +40,14 @@
                             <button class="button auth__button">Entrar</button>
                             <a href="/registrar" class="button auth__button">Registrar</a>
                         </form>
+                        <br>
+                        <div class="g-signin2" data-width="200" data-height="50" data-onsuccess="onSignIn"></div>
                     </div>
                 </div>
             </section>
         </div>
     </div>
 </div>
-​     {% endblock %}
+{% script "/js/login.js" %}
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+{% endblock %}

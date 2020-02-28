@@ -62,6 +62,17 @@ function fraudDown(id) {
   })
   .catch(function (error) {
     console.log(error);
-    alert("Aconteceu um erro no seu voto, tente mais tarde");
+    alert("Aconteceu um erro no seu voto, tente mais tarde. Se você já votou não é possível votar duas vezes.");
   });
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    $notification = $delete.parentNode;
+
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
+});

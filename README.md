@@ -34,7 +34,7 @@ or just run lein into your IDE
 ### Update queries
 ```clojure
 (in-ns 'fraude.db.core)
-(conman/bind-connection *db* "sql/queries.sql")
+(conman/bind-connection *db* "sql/queries.sql" "sql/person.sql")
 ```
 
 ### REPL test user creation/login
@@ -75,3 +75,11 @@ run
 
 java -version
 openjdk version "1.8.0_232"
+
+
+
+
+
+
+google secret:
+6s2Wn_rkem5wLV0IZBoeqObA

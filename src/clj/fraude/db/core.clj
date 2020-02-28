@@ -10,7 +10,7 @@
           :start (conman/connect! {:jdbc-url (env :database-url)})
           :stop (conman/disconnect! *db*))
 
-(conman/bind-connection *db* "sql/queries.sql")
+(conman/bind-connection *db* "sql/queries.sql" "sql/person.sql")
 
 
 (extend-protocol jdbc/IResultSetReadColumn

@@ -6,6 +6,11 @@
     {% if content.meta %}
       <title>{{ content.meta.title }} | é Fraude, juntos protegendo a sociedade de crimes e fraudes</title>
       <meta name="description" content="{{ content.meta.description }}">
+      <meta property="og:title" content="{{ content.meta.title }}" />
+      <meta property="og:description" content="{{ content.meta.description }}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="{{ content.meta.url }}" />
+      <meta property="og:image" content="https://efraude.app/img/image-fraud.jpg" />
     {% else %}
       <title>é Fraude, juntos protegendo a sociedade de crimes e fraudes</title>
       <meta name="description" content="éfraude.app um app que busca identificar golpes e fraudes de maneira descentralizada onde a sociedade se ajuda a acabar com os crimes de fraude no Brasil">
@@ -26,6 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- End Google Tag Manager -->
 
     <meta name="robots" content="index, follow"/>
+    <meta name="google-signin-client_id" content="617285135540-supnsanh5o59qjkj83o2458g40rr8bs7.apps.googleusercontent.com" />
   </head>
   <body>
   <!-- Google Tag Manager (noscript) -->

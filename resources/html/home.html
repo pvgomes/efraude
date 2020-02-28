@@ -31,7 +31,7 @@
                     {% for item in content.last %}
                     <tr>
                         <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
-                        <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
+                        <td><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></td>
                     </tr>
                     {% endfor %} ​ 
                     </ul>
@@ -49,7 +49,7 @@
                     {% for item in content.top %}
                     <tr>
                         <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
-                        <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
+                        <td><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></td>
                     </tr>
                     {% endfor %} ​ 
                     </ul>

@@ -5,6 +5,12 @@ CREATE TABLE `person`
 `password` varchar(100) NOT NULL,
 `created_at` datetime DEFAULT NULL,
 `updated_at` datetime DEFAULT NULL,
+`image` varchar(2048),
+`token` varchar(2048),
+`refresh_token` varchar(2048),
+`facebook_token` varchar(2048),
+`google_token` varchar(2048),
+`additional` text,
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

@@ -8,7 +8,7 @@
     [fraude.middleware :as middleware]
     [ring.util.response :as res]
     [ring.util.http-response :as response]
-    [struct.core :as st]))
+    [cheshire.core :as json]))
 
 (defn logout [req]
   (-> (res/redirect "/")
@@ -63,7 +63,8 @@
   (layout/response-raw))
 
 (defn sitemap [request]
-  (layout/response-xml "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">
+  (layout/response-xml
+    (str "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">
   <url>
    <loc>https://efraude.app/</loc>
    <lastmod>2020-02-07T05:24:02+00:00</lastmod>
@@ -73,18 +74,9 @@
    <loc>https://efraude.app/termos</loc>
    <lastmod>2020-02-07T05:24:02+00:00</lastmod>
    <priority>1</priority>
-  </url>
-  <url>
-   <loc>https://efraude.app/fraude/8/fraudedoleilofalso</loc>
-   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
-   <priority>1</priority>
-  </url>
-  <url>
-   <loc>https://efraude.app/fraude/8/fraudedoleilofalso</loc>
-   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
-   <priority>1</priority>
-  </url>
-  </urlset>"))
+  </url>"
+  (c-fraud/frauds-nodes)
+  "</urlset>")))
 
 (defn entrar-page [request]
   (layout/render request "entrar.html" (render request)))
@@ -108,7 +100,9 @@
        (layout/render request "fraude.html")))
 
 (defn home-page [request]
-  (layout/render request "home.html" (render (assoc request :content (c-fraud/dashboard)))))
+  (layout/render request "home.html"
+                 (render
+                   (assoc request :content (c-fraud/dashboard)))))
 
 (defn termos-page [request]
   (layout/render request "termos.html" (render request)))
@@ -120,6 +114,12 @@
 
 (defn perfil-page [request]
   (layout/render request "perfil.html" (render request)))
+
+(defn login-google [{:keys [params session] :as request}]
+  (let [person (select-keys (c-person/handle-google! params) [:name :email :token :type :id])
+        updated-session (assoc session :identity person)]
+    (-> (response/accepted (json/generate-string person))
+        (assoc :session updated-session))))
 
 (defn home-routes []
   [""
@@ -140,5 +140,6 @@
    ["/fraud/add" {:post save-fraud!}]
    ["/fraud/up" {:post relevance-up!}]
    ["/fraud/down" {:post relevance-down!}]
+   ["/social/google" {:post login-google}]
    ["/login" {:post login}]
    ["/logout" {:get logout}]])

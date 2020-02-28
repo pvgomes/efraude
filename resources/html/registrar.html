@@ -45,10 +45,13 @@
                     <a href="/entrar">Já tem uma conta?</a>
                 </div>
             </form>
-
+            <br>
+            <div class="g-signin2" data-width="200" data-height="50" data-onsuccess="onSignIn"></div>
 
         </div>
     </section>
     ​ 
 </div>
+{% script "/js/login.js" %}
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 ​     {% endblock %}
