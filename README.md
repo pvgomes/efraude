@@ -61,8 +61,22 @@ or just run lein into your IDE
 generate jar
 `lein uberjar`
 
-sync .jar
-`scp ./target/uberjar/fraude-0.1.0-SNAPSHOT.jar root@104.236.125.208:/home/pvgomes/`
+
+sync .jar 
+scp ./target/uberjar/fraude.jar root@104.236.125.208:/home/pvgomes/
+
+
+Process
+```
+systemctl status efraude
+systemctl stop efraude
+mv /var/www/efraude/fraude.jar /var/www/efraude/last-release/
+cp /home/pvgomes/fraude.jar /var/www/efraude/
+systemctl start efraude
+systemctl status efraude
+```
+
+
 
 
 export env vars

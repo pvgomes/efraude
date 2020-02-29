@@ -50,7 +50,7 @@ select f.id, f.name, count(f.id) from fraud as f
   inner join relevance as r
     on f.id = r.fk_fraud
 where r.type = :type
-group by f.id
+group by f.id, f.name
 order by count(f.id) desc
 limit :limit;
 
