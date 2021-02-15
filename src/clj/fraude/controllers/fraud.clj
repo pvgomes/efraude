@@ -49,18 +49,3 @@
    (->> frauds
          (l-fraud/complete-url)
          (nodes))))
-
-(comment
-;make unit test using this data
-  (def frauds '({:id 2,
-                 :name "Clone do Whatsapp ",
-                 :message "<p>Clone do Whatsapp&nbsp;</p>",
-                 :caution "<p>Clone do Whatsapp&nbsp;</p>",
-                 :url "",
-                 :fk_person 1}
-                {:id 1,
-                 :name "Curso novos ricos",
-                 :message "<p>Curso novos ricos</p>",
-                 :caution "<p>Curso novos ricos</p>",
-                 :url "",
-                 :fk_person 1})))
