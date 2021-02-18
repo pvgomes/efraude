@@ -15,6 +15,15 @@ To start a web server for the application, run:
 
 or just run lein into your IDE
 
+## Copy dev-config.edn.dist (change something inside if you need like db connection)
+`cp dev-config.edn.dist dev-config.edn`
+
+### Start Mysql
+```docker-compose up```
+
+### Create fraude db
+```docker exec -it fraude_db_1 mysql -uroot -ptoeco190 --execute="CREATE DATABASE fraude;"```
+
 ### Start web server
 ```clojure
 (start)

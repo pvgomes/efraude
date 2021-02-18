@@ -24,7 +24,8 @@
                                                   :limit 5}))})
 
 (defn all []
-  (db/get-frauds {:fraud_limit 200}))
+  (->> (db/get-frauds {:fraud_limit 200})
+       (l-fraud/complete-url)))
 
 (defn by-person [id]
   (db/frauds-by-person {:fk_person id}))
