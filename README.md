@@ -43,7 +43,7 @@ or just run lein into your IDE
 ### Update queries
 ```clojure
 (in-ns 'fraude.db.core)
-(conman/bind-connection *db* "sql/queries.sql" "sql/person.sql")
+(conman/bind-connection *db* "sql/queries.sql" "sql/person.sql" "sql/clone.sql")
 ```
 
 ### REPL test user creation/login
