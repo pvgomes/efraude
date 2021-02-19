@@ -3,6 +3,7 @@ CREATE TABLE `clone`
 `phone` varchar(100) NOT NULL,
 `message` text DEFAULT NULL,
 `fk_person` int(11) NOT NULL,
+`status` ENUM('cloned', 'canceled', 'safe'),
 `cloned_at` datetime DEFAULT NULL,
 `created_at` datetime DEFAULT NULL,
 `updated_at` datetime DEFAULT NULL,

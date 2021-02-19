@@ -41,6 +41,7 @@ or just run lein into your IDE
 
 
 ### Update queries
+when you update .sql files
 ```clojure
 (in-ns 'fraude.db.core)
 (conman/bind-connection *db* "sql/queries.sql" "sql/person.sql" "sql/clone.sql")

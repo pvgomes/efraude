@@ -4,6 +4,7 @@
     [fraude.db.core :as db]
     [fraude.controllers.person :as c-person]
     [fraude.controllers.fraud :as c-fraud]
+    [fraude.controllers.clone :as c-clone]
     [fraude.controllers.relevance :as c-relevance]
     [fraude.middleware :as middleware]
     [ring.util.response :as res]
@@ -52,6 +53,10 @@
   (c-fraud/save! params)
   (response/found "/"))
 
+(defn save-clone! [{:keys [params]}]
+  (c-clone/save! params)
+  (response/found "/"))
+
 (defn relevance-up! [{:keys [params] :as request}]
   (let [user (req-user request)]
     (c-relevance/save! (:id user) (:id params) "positive"))
@@ -83,6 +88,9 @@
 
 (defn registrar-page [request]
   (layout/render request "registrar.html" (render request)))
+
+(defn registrar-clone-de-whatsapp-page [request]
+  (layout/render request "registrar-clone.html" (render request)))
 
 (defn fraudes-page [request]
   (layout/render request "fraudes.html" (render (assoc request :content (c-fraud/all)))))
@@ -129,6 +137,7 @@
    ["/sitemap" {:get sitemap}]
    ["/entrar" {:get entrar-page}]
    ["/registrar" {:get registrar-page}]
+   ["/registrar-clone-de-whatsapp" {:get registrar-clone-de-whatsapp-page}]
    ["/fraudes" {:get fraudes-page}]
    ["/noticias" {:get noticias-page}]
    ["/denuncie" {:get denuncie-page}]
@@ -138,6 +147,7 @@
    ["/fraude/:id/:title" {:get fraude-page}]
    ["/person/add" {:post save-person!}]
    ["/fraud/add" {:post save-fraud!}]
+   ["/clone/add" {:post save-clone!}]
    ["/fraud/up" {:post relevance-up!}]
    ["/fraud/down" {:post relevance-down!}]
    ["/social/google" {:post login-google}]

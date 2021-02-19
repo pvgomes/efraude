@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "partial/menu.html" %}
+
+<section class="section">
+    <div class="container">
+        <div class="container">
+            {% if user %}
+            <div class="notification">
+                <h1> <strong>Registro de whatsapp clonado</strong> </h1>
+
+                <span>Além de preencher esse formulário recomendados que siga esses passos</span>
+                <ul>
+                    <li>Mande um e-mail para:	support@support.whatsapp.com informando no título "Whatsapp clonado número (xx)" informando seu número.</li>
+                    <li>Avise seus contatos nas suas redes sociais e por telefone se possível.</li>
+                </ul>
+
+                <br>
+                <form method="POST" action="/clone/add">
+                    {% csrf-field %}
+                    <div class=field">
+                        <label class="label" for="phone">
+                            <strong>Número do telefone</strong>
+                            <br>
+                            <span>(ex: (11) 95421-1000)</span>
+                        </label>
+                        {% if errors.phone %}
+                        <div class="notification is-danger">
+                            {{errors.phone|join}}
+                        </div>
+                        {% endif %}
+                        <div class="control">
+                            <input type="text" id="phone" class="input phone" name="phone" value="{{phone}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="field">
+                        <label class="label" for="message">
+                            <strong>explique como foi o clone, ou avise como te contactar, o texto aqui é livre</strong></label>
+                        {% if errors.message %}
+                        <div class="notification is-danger">
+                            {{errors.message|join}}
+                        </div>
+                        {% endif %}
+                        <textarea class="textarea" name="message" id="message">{{message}}</textarea>
+                    </div>
+                    <br>
+                    <div class="field">
+                        <label class="label" for="cloned_at">
+                            <strong>Data que foi clonado</strong>
+                            <br> coloque uma data que acredita ter sido clonado</label>
+                        {% if errors.cloned_at %}
+                        <div class="notification is-danger">
+                            {{errors.cloned_at|join}}
+                        </div>
+                        {% endif %}
+                        <div class="control">
+                            <input type="date" id="cloned_at" class="input" name="cloned_at" value="{{cloned_at}}">
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="fk_person" name="fk_person" class="input"
+                           value="{{ user.id }}">
+
+                    <div class="control">
+                        <br>
+                        <button type="submit" class="button is-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            teve o whatsapp clonado? cadastre-se para denunciar
+                        </h1>
+                        <h2 class="subtitle">
+                            faça seu cadastro, não leva 30 segundos
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <div class="buttons">
+                <a href="/registrar" class="button is-primary">
+                    <strong>Registrar</strong>
+                </a>
+                <a href="/entrar" class="button is-light">
+                    Entrar
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+<!--<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>-->
+<script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
+<script type='text/javascript' src='//code.jquery.com/jquery-compat-git.js'></script>
+<script type='text/javascript' src='//igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js'></script>
+<script>
+CKEDITOR.replace( 'message', {
+    language: 'pt_BR'
+});
+
+var behavior = function (val) {
+    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+},
+options = {
+    onKeyPress: function (val, e, field, options) {
+        field.mask(behavior.apply({}, arguments), options);
+    }
+};
+
+$('.phone').mask(behavior, options);
+</script>
+{% endblock %}
