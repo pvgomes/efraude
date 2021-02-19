@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-​     {% block content %}
+{% block content %}
 {% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
-​ 
 <div class=​"content"​>
     <div class="columns">
         <div class="column is-full">
@@ -19,12 +18,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for item in content %}
+                            {% for item in content.frauds %}
                             <tr>
                                 <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
-                                <td><a href="/fraude/{{item.id}}/{{item.name|remove:\":ãéíç[]@!$&'()*+,;= /\\"}}" title="{{item.name}}">{{item.name}}</a></td>
+                                <td><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></td>
                             </tr>
-                            {% endfor %} ​ 
+                            {% endfor %}
+                            {% for item in content.clones %}
+                            <tr>
+                                <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
+                                <td><a href="{{item.url}}" title="{{item.phone}}">whatsapp clonado {{item.phone}}</a></td>
+                            </tr>
+                            {% endfor %}
                             </ul>
                             </tbody>
                         </table>
@@ -33,8 +38,5 @@
             </section>
         </div>
     </div>
-    ​ 
 </div>
-​     {% endblock %}
-
-
+{% endblock %}
