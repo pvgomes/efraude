@@ -24,3 +24,27 @@
 (defn by-person [id]
   (->> (db/clones-by-person {:fk_person id})
        (l-clone/complete-url)))
+
+(defn all []
+  (->> (db/get-clones {:clone_limit 200})
+       (l-clone/complete-url)))
+
+(defn node [clone]
+  (str "<url>
+  <loc>https://efraude.app" (:url clone) "</loc>
+  <lastmod>" (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss+00:00") (new java.util.Date)) "</lastmod>
+  <priority>1</priority>
+  </url>"))
+
+(defn nodes [clones]
+  (->> clones
+       (map node)
+       (clojure.string/join "")))
+
+;Multi-Arity
+(defn clones-nodes
+  ([] (clones-nodes (all)))
+  ([frauds]
+   (->> frauds
+        (l-clone/complete-url)
+        (nodes))))

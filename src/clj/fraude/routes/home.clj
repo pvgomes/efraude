@@ -1,11 +1,11 @@
 (ns fraude.routes.home
   (:require
     [fraude.layout :as layout]
-    [fraude.db.core :as db]
     [fraude.controllers.person :as c-person]
     [fraude.controllers.fraud :as c-fraud]
     [fraude.controllers.clone :as c-clone]
     [fraude.controllers.relevance :as c-relevance]
+    [fraude.logic.xml :as l-xml]
     [fraude.middleware :as middleware]
     [ring.util.response :as res]
     [ring.util.http-response :as response]
@@ -68,20 +68,7 @@
   (layout/response-raw))
 
 (defn sitemap [request]
-  (layout/response-xml
-    (str "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">
-  <url>
-   <loc>https://efraude.app/</loc>
-   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
-   <priority>1</priority>
-  </url>
-  <url>
-   <loc>https://efraude.app/termos</loc>
-   <lastmod>2020-02-07T05:24:02+00:00</lastmod>
-   <priority>1</priority>
-  </url>"
-  (c-fraud/frauds-nodes)
-  "</urlset>")))
+  (layout/response-xml (l-xml/xml-sitemap)))
 
 (defn entrar-page [request]
   (layout/render request "entrar.html" (render request)))
