@@ -107,10 +107,16 @@
        (render)
        (layout/render request "fraude.html")))
 
+(defn clone-page [{:keys [path-params] :as request}]
+  (->> (c-clone/get-clone path-params)
+       (assoc request :content)
+       (render)
+       (layout/render request "fraude.html")))
+
 (defn home-page [request]
   (layout/render request "home.html"
                  (render
-                   (assoc request :content (c-fraud/dashboard)))))
+                   (assoc request :content (merge (c-fraud/dashboard) (c-clone/dashboard))))))
 
 (defn termos-page [request]
   (layout/render request "termos.html" (render request)))
@@ -118,7 +124,8 @@
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
                  (render (assoc request :content
-                                        (c-fraud/by-person (:id (req-user request)))))))
+                                        {:frauds (c-fraud/by-person (:id (req-user request)))
+                                         :clones (c-clone/by-person (:id (req-user request)))}))))
 
 (defn perfil-page [request]
   (layout/render request "perfil.html" (render request)))
@@ -145,6 +152,7 @@
    ["/suas-denuncias" {:get denuncias-page}]
    ["/perfil" {:get perfil-page}]
    ["/fraude/:id/:title" {:get fraude-page}]
+   ["/whatsapp-clonado/:id/:title" {:get clone-page}]
    ["/person/add" {:post save-person!}]
    ["/fraud/add" {:post save-fraud!}]
    ["/clone/add" {:post save-clone!}]

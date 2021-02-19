@@ -7,18 +7,23 @@
 
             <div class="box">
                 <article class="media">
-
-                    <!--                    <div class="media-left">-->
-                    <!--                        <figure class="image is-64x64">-->
-                    <!--                            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">-->
-                    <!--                        </figure>-->
-                    <!--                    </div>-->
-
+                    {% if content.phone %}
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            <img src="https://res.cloudinary.com/dy6tllzoq/image/upload/v1613767820/fraude/whatsappclonado.jpg" alt="Image">
+                        </figure>
+                    </div>
+                    {% endif %}
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <strong>{{ content.name }}</strong><br>
-                                <small>{{content.updated_at|date:"dd/MM/yyyy"}}</small>
+                                {% if content.name %}
+                                    <strong>{{ content.name }}</strong><br>
+                                    <small>{{content.updated_at|date:"dd/MM/yyyy"}}</small>
+                                {% else %}
+                                <strong>Whatsapp clonado {{ content.phone }}</strong><br>
+                                <small>Clonado dia {{content.cloned_at|date:"dd/MM/yyyy"}}</small>
+                                {% endif %}
                                 <br>
                                 {{ content.message|safe }}
                                 <br>
@@ -35,47 +40,53 @@
                                 <br>
                                 {% endif %}
 
+                                {% if content.name %}
+                                    <strong>chances de ser fraude: </strong>
+                                    <span class="tag is-danger">Alta</span>
+                                {% else %}
+                                <!--        we need to use those status to warn if it is still cloned                        {{ content.status }}-->
+                            <div class="notification">
+                                <button class="delete"></button>
+                            geralmente até 24 horas após o usuário original saber do clone a conta ja é recuperada. Contando a partir do momento que se pede para ativar o whatsapp no celular novamente.
+                            <br>
+                            recomendamos sempre o envio de um e-mail para support@support.whatsapp.com avisando da clonagem.
+                            <br><br>
+                            Queremos <strong>pressionar o WhatsApp para não bloquear esse reset por 24 horas após a primeira ativação</strong> pois isso gera mais tempo para o fraudador conseguir aplicar golpes.
+                            <br> Envie um e-mail para o whatsapp cobrando essa mudança e ajude toda a comunidade de usuários a evitar esse tipo de golpe.
 
+                            </div>
 
-                                <strong>chances de ser fraude: </strong>
+                                {% endif %}
 
-                                <span class="tag is-danger">Alta</span>
                             </p>
                         </div>
                         <nav class="level is-mobile">
 
-                            {% if user %}
-                            <div class="buttons">
-                                {% csrf-field %}
-<!--                                <button class="button">-->
-<!--                                    <span class="icon">-->
-<!--                                      <i class="fas fa-reply"></i>-->
-<!--                                    </span>-->
-<!--                                    <span>comentar</span>-->
-<!--                                </button>-->
+                            {% if content.name %}
+                                {% if user %}
+                                <div class="buttons">
+                                    {% csrf-field %}
+                                    <button class="button" onclick="fraudUp({{ content.id }})">
+                                        <span class="icon">
+                                          <i class="fas fa-thumbs-up"></i>
+                                        </span>
+                                        <span>é fraude</span>
+                                    </button>
 
-                                <button class="button" onclick="fraudUp({{ content.id }})">
-                                    <span class="icon">
-                                      <i class="fas fa-thumbs-up"></i>
-                                    </span>
-                                    <span>é fraude</span>
-                                </button>
-
-                                <button class="button" onclick="fraudDown({{ content.id }})">
-                                    <span class="icon">
-                                      <i class="fas fa-thumbs-down"></i>
-                                    </span>
-                                    <span>não é fraude</span>
-                                </button>
-                            </div>
-                            {% else %}
-
-                            <div class="notification">
-                                <button class="delete"></button>
-                                As chances de isso ser uma fraude é baseada nos votos dos nossos usuários
-                                Para votar é preciso <a href="/entrar">entrar</a>
-                            </div>
-
+                                    <button class="button" onclick="fraudDown({{ content.id }})">
+                                        <span class="icon">
+                                          <i class="fas fa-thumbs-down"></i>
+                                        </span>
+                                        <span>não é fraude</span>
+                                    </button>
+                                </div>
+                                {% else %}
+                                <div class="notification">
+                                    <button class="delete"></button>
+                                    As chances de isso ser uma fraude é baseada nos votos dos nossos usuários
+                                    Para votar é preciso <a href="/entrar">entrar</a>
+                                </div>
+                                {% endif %}
                             {% endif %}
 
                         </nav>

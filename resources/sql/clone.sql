@@ -7,6 +7,8 @@ VALUES (:phone, :message, :status, :fk_person, :cloned_at, now(), now())
 -- :name get-clones :? :*
 -- :doc selects all clones
 SELECT * from clone
+order by updated_at desc
+limit :clone_limit
 
 -- :name get-clone :? :1
 -- :doc retrieves a clone record given the id
@@ -17,3 +19,9 @@ WHERE id = :id
 -- :doc retrieves a clones record given the phone
 SELECT * FROM clone
 WHERE phone LIKE '%:phone%'
+
+-- :name clones-by-person :? :*
+-- :doc get clones by person
+SELECT * from clone
+WHERE fk_person = :fk_person
+order by updated_at desc

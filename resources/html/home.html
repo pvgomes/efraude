@@ -19,6 +19,59 @@
         </div>
     </section>
     <section>
+
+        <div class="columns is-variable is-5-mobile is-2-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+            <div class="column">
+                <table class="table is-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="2">últimos números de whatsapp clonados</th>
+                    </tr>
+                    </thead>
+                    <tbody class="is-danger is-light">
+                    {% for item in content.clones %}
+                    <tr>
+                        <td>
+                            {{item.phone}} clonado dia {{item.cloned_at|date:"dd/MM/yyyy"}}
+                            <a href="{{item.url}}" title="{{item.phone}}">
+                        <span class="icon-text">
+                          <span class="icon">
+                            <i class="fas fa-skull"></i>
+                          </span>
+                          <span></span>
+                        </span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </ul>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column">
+                <div class="container">
+
+                    <h3 class="">
+                        veja se você teve seu whatsapp clonado
+                    </h3>
+                    <p class="">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input class="input" type="text" onclick="searchPhone()" placeholder="digite um telefone..">
+                        </div>
+                        <div class="control">
+                            <a class="button is-info">
+                                Buscar
+                            </a>
+                        </div>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section>
         <div class="columns is-variable is-5-mobile is-2-tablet is-3-desktop is-8-widescreen is-2-fullhd">
             <div class="column">
                 <table class="table is-fullwidth">
@@ -33,7 +86,7 @@
                         <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
                         <td><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></td>
                     </tr>
-                    {% endfor %} ​ 
+                    {% endfor %}
                     </ul>
                     </tbody>
                 </table>
@@ -51,7 +104,7 @@
                         <th>{{item.created_at|date:"dd/MM/yyyy"}}</th>
                         <td><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></td>
                     </tr>
-                    {% endfor %} ​ 
+                    {% endfor %}
                     </ul>
                     </tbody>
                 </table>
@@ -59,4 +112,10 @@
         </div>
     </section>
 </div>
-​{% endblock %}
+<script>
+function searchPhone() {
+  alert("esta funcionalidade esta em desenvolvimento ainda, por enquanto utilize o google para buscar se seu número foi clonado");
+}
+</script>
+</script>
+{% endblock %}

@@ -28,8 +28,8 @@
        (l-fraud/complete-url)))
 
 (defn by-person [id]
-  (db/frauds-by-person {:fk_person id}))
-
+  (->> (db/frauds-by-person {:fk_person id})
+       (l-fraud/complete-url)))
 
 (defn node [fraud]
   (str "<url>
