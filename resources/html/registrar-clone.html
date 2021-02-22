@@ -5,7 +5,6 @@
 <section class="section">
     <div class="container">
         <div class="container">
-            {% if user %}
             <div class="notification">
                 <h1> <strong>Registro de whatsapp clonado</strong> </h1>
 
@@ -64,34 +63,16 @@
 
                     <div class="control">
                         <br>
+                        <span style="font-size:10px">
+                        Clicando em registrar você esta concordando com nossos <a href="/termos" target="_blank">termos</a> e a responsabilidade dessa informação é sua
+                        </span>
+
+                        <br>
                         <button type="submit" class="button is-primary">Registrar</button>
                     </div>
                 </form>
             </div>
-            {% else %}
 
-            <section class="hero">
-                <div class="hero-body">
-                    <div class="container">
-                        <h1 class="title">
-                            teve o whatsapp clonado? cadastre-se para denunciar
-                        </h1>
-                        <h2 class="subtitle">
-                            faça seu cadastro, não leva 30 segundos
-                        </h2>
-                    </div>
-                </div>
-            </section>
-
-            <div class="buttons">
-                <a href="/registrar" class="button is-primary">
-                    <strong>Registrar</strong>
-                </a>
-                <a href="/entrar" class="button is-light">
-                    Entrar
-                </a>
-            </div>
-            {% endif %}
 
         </div>
     </div>
