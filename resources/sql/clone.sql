@@ -1,8 +1,8 @@
 -- :name create-clone! :! :n
 -- :doc creates a new clone
 INSERT INTO clone
-(phone, message, status, fk_person, cloned_at, created_at, updated_at)
-VALUES (:phone, :message, :status, :fk_person, :cloned_at, now(), now())
+(phone, message, fk_person, status, ip, cloned_at, created_at, updated_at)
+VALUES (:phone, :message, :fk_person, :status, :ip, :cloned_at, now(), now())
 
 -- :name get-clones :? :*
 -- :doc selects all clones
