@@ -54,8 +54,6 @@
   (response/found "/"))
 
 (defn save-clone! [{:keys [params] :as request}]
-  (println (:remote-addr request))
-  (println (assoc params :ip (:remote-addr request)))
   (c-clone/save! (assoc params :ip (:remote-addr request)))
   (response/found "/"))
 
