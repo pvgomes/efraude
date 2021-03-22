@@ -53,8 +53,8 @@
   (c-fraud/save! params)
   (response/found "/"))
 
-(defn save-clone! [{:keys [params]}]
-  (c-clone/save! params)
+(defn save-clone! [{:keys [params] :as request}]
+  (c-clone/save! (assoc params :ip (:remote-addr request)))
   (response/found "/"))
 
 (defn relevance-up! [{:keys [params] :as request}]

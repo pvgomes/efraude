@@ -3,12 +3,16 @@
     [fraude.db.core :as db]
     [fraude.logic.clone :as l-clone]))
 
-(defn save! [{:keys [phone message cloned_at fk_person]}]
-  (db/create-clone! {:phone phone
-                     :message message
-                     :status "cloned"
-                     :cloned_at cloned_at
-                     :fk_person fk_person}))
+(defn save! [{:keys [phone message cloned_at fk_person ip]}]
+  (let [person_id (if (empty? fk_person)
+                    nil
+                    fk_person)]
+    (db/create-clone! {:phone phone
+                       :message message
+                       :status "cloned"
+                       :cloned_at cloned_at
+                       :fk_person person_id
+                       :ip ip})))
 
 (defn get-clone [id]
   (let [clone (db/get-clone id)
