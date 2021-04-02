@@ -73,10 +73,14 @@ generate jar
 
 
 sync .jar 
-scp ./target/uberjar/fraude.jar root@104.236.125.208:/home/pvgomes/
+`scp ./target/uberjar/fraude.jar root@104.236.125.208:/home/pvgomes/`
+
+### Run deploy script
+`ssh web01 'sudo ./efraude_deploy.sh'`
 
 
-Process
+
+Deploy script content
 ```
 systemctl status efraude
 systemctl stop efraude
