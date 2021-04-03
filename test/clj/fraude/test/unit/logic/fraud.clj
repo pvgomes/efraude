@@ -95,4 +95,59 @@
                      :url "/fraude/58/crime-do-zap-zaps-e-uma-safadesa",
                      :fk_person 1,
                      :prefix "/fraude/"}]]
+      (is (= (l-fraud/complete-url frauds) expected))))
+
+  (testing "xml ids check"
+    (let [frauds '({:id        1,
+                    :name      "Curso novos ricos",
+                    :message   "<p>Curso novos ricos</p>",
+                    :caution   "<p>Curso novos ricos</p>",
+                    :url       "",
+                    :fk_person 1}
+                   {:id        15,
+                    :name      "leilao mula",
+                    :message   "<p>Curso novos ricos</p>",
+                    :caution   "<p>Curso novos ricos</p>",
+                    :url       "",
+                    :fk_person 1}
+                   {:id        52,
+                    :name      "crime do zap zaps é uma safadesa",
+                    :message   "<p>clones no zap zaps</p>",
+                    :caution   "<p>nao seji burro</p>",
+                    :url       "",
+                    :fk_person 1}
+                   {:id        "58",
+                    :name      "crime do zap zaps é uma safadesa",
+                    :message   "<p>clones no zap zaps</p>",
+                    :caution   "<p>nao seji burro</p>",
+                    :url       "",
+                    :fk_person 1})
+          expected [{:id 1,
+                     :name "Curso novos ricos",
+                     :message "<p>Curso novos ricos</p>",
+                     :caution "<p>Curso novos ricos</p>",
+                     :url "/fraude/1/Cursonovosricos",
+                     :fk_person 1,
+                     :prefix "/fraude/"}
+                    {:id 15,
+                     :name "leilao mula",
+                     :message "<p>Curso novos ricos</p>",
+                     :caution "<p>Curso novos ricos</p>",
+                     :url "/fraude/15/leilaomula",
+                     :fk_person 1,
+                     :prefix "/fraude/"}
+                    {:id 52,
+                     :name "crime do zap zaps é uma safadesa",
+                     :message "<p>clones no zap zaps</p>",
+                     :caution "<p>nao seji burro</p>",
+                     :url "/fraude/52/crime-do-zap-zaps-e-uma-safadesa",
+                     :fk_person 1,
+                     :prefix "/fraude/"}
+                    {:id "58",
+                     :name "crime do zap zaps é uma safadesa",
+                     :message "<p>clones no zap zaps</p>",
+                     :caution "<p>nao seji burro</p>",
+                     :url "/fraude/58/crime-do-zap-zaps-e-uma-safadesa",
+                     :fk_person 1,
+                     :prefix "/fraude/"}]]
       (is (= (l-fraud/complete-url frauds) expected)))))
