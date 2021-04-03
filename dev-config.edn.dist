@@ -8,4 +8,4 @@
  :nrepl-port 7000
  
  ;:database-url "jdbc:h2:./fraude_dev.db"
-  :database-url "jdbc:mysql://root:toeco190@0.0.0.0:3306/fraude"}
+  :database-url "jdbc:mysql://root:efraude190@0.0.0.0:3306/fraude"}

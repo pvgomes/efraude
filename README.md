@@ -17,30 +17,33 @@ To start a web server for the application, run:
 
 or just run lein into your IDE
 
-## Copy dev-config.edn.dist (change something inside if you need like db connection)
+## Copy dev-config.edn.dist (it uses docker configuration, you can change it if you want)
 `cp dev-config.edn.dist dev-config.edn`
+
+## Copy test-config.edn.dist (it uses docker configuration, you can change it if you want)
+`cp test-config.edn.dist test-config.edn`
 
 ### Start Mysql
 ```docker-compose up```
 
-### Create fraude db
-```docker exec -it fraude_db_1 mysql -uroot -ptoeco190 --execute="CREATE DATABASE fraude;"```
+### Create fraude db and test db
+```docker exec -it fraude_db_1 mysql -uroot -pefraude190 --execute="CREATE DATABASE fraude;"```
+```docker exec -it fraude_db_1 mysql -uroot -pefraude190 --execute="CREATE DATABASE fraude_test;"```
 
-### Start web server
+### Start web server on REPL
 ```clojure
 (start)
 ```
 
-### Create migration
+### Create migration on REPL
 ```clojure
 (create-migration "fraude")
 ```
 
-### Run migration
+### Run migration on REPL
 ```clojure
 (migrate)
 ```
-
 
 ### Update queries
 when you update .sql files
@@ -66,50 +69,3 @@ when you update .sql files
 
 ### test
 `lein test`
-
-
-### Deploy flow
-
-generate jar
-`lein uberjar`
-
-
-sync .jar 
-`scp ./target/uberjar/fraude.jar root@104.236.125.208:/home/pvgomes/`
-
-### Run deploy script
-`ssh web01 'sudo ./efraude_deploy.sh'`
-
-
-
-Deploy script content
-```
-systemctl status efraude
-systemctl stop efraude
-mv /var/www/efraude/fraude.jar /var/www/efraude/last-release/
-cp /home/pvgomes/fraude.jar /var/www/efraude/
-systemctl start efraude
-systemctl status efraude
-```
-
-
-
-
-export env vars
-`export DATABASE_URL="jdbc:mysql://root:toeco190@0.0.0.0:3306/fraude"`
-
-run
-`java -jar target/uberjar/fraude.jar`
-
-
-
-java -version
-openjdk version "1.8.0_232"
-
-
-
-
-
-
-google secret:
-6s2Wn_rkem5wLV0IZBoeqObA

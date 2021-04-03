@@ -17,28 +17,15 @@ services:
       - "80:80"
     networks:
       - fraude-network
-  redis:
-    image: redis:3.0
-    ports:
-      - "6379"
-    networks:
-      - fraude-network
-    deploy:
-      replicas: 2
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
 
   db:
-    image: mysql:5.7
+    image: mysql:5.7.33
     ports:
       - "3306:3306"
     volumes:
-      - "fraude-mysql:/var/lib/mysql"
+      - "./docker/db/fraude-mysql:/var/lib/mysql"
     environment:
-      - MYSQL_ROOT_PASSWORD=toeco190
+      - MYSQL_ROOT_PASSWORD=efraude190
     networks:
       - fraude-network
     deploy:
