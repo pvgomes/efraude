@@ -1,4 +1,4 @@
-(ns fraude.test.logic.fraude.test.logic.fraud
+(ns fraude.test.unit.logic.fraud
   (:require
     [clojure.test :refer :all]
     [ring.mock.request :refer :all]

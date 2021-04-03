@@ -1,4 +1,4 @@
-(ns fraude.test.db.core
+(ns fraude.test.integration.db.core
   (:require
    [fraude.db.core :refer [*db*] :as db]
    [java-time.pre-java8]
@@ -30,3 +30,5 @@
            (-> (db/get-persons t-conn {})
                (first)
                (select-keys [:name :email]))))))
+
+

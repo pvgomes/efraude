@@ -1,4 +1,4 @@
-(ns fraude.test.handler
+(ns fraude.test.integration.handler
   (:require
     [clojure.test :refer :all]
     [ring.mock.request :refer :all]
