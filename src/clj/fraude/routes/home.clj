@@ -80,7 +80,8 @@
   (layout/render request "registrar-clone.html" (render request)))
 
 (defn fraudes-page [request]
-  (layout/render request "fraudes.html" (render (assoc request :content (c-fraud/all)))))
+  (layout/render request "fraudes.html" (render (assoc request :content
+                                                               {:frauds (c-fraud/all)}))))
 
 (defn noticias-page [request]
   (layout/render request "noticias.html" (render request)))
