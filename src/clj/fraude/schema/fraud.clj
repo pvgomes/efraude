@@ -1,10 +1,7 @@
 (ns fraude.schema.fraud
   (:require [schema.core :as s]))
 
-
-;name, message, caution, fk_person, url, created_at, updated_at
-
-(def fraud
+(s/defschema fraud
   "Fraud structure"
   {:id s/Int
    :name s/Str
