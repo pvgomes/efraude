@@ -4,6 +4,7 @@
     [ring.mock.request :refer :all]
     [fraude.controllers.clone :as c-clone]))
 
+;it could be flaky test because of current datetime generation
 (deftest test-url
   (testing "clone node xml"
     (let [clone {:id        2,
