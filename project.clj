@@ -1,6 +1,6 @@
 (defproject fraude "0.1.0-SNAPSHOT"
 
-  :description "fraude application"
+  :description "fraud reports web application"
   :url "http://fraude.app"
 
   :dependencies [[ch.qos.logback/logback-classic "1.2.3"]
@@ -33,7 +33,8 @@
                  [ring/ring-defaults "0.3.2"]
                  [selmer "1.12.18"]
                  [mysql/mysql-connector-java "8.0.19"]
-                 [buddy "2.0.0"]]
+                 [buddy "2.0.0"]
+                 [prismatic/schema "1.1.12"]]
 
 
   :min-lein-version "2.0.0"

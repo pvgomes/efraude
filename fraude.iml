@@ -164,7 +164,7 @@
     <orderEntry type="library" name="Leiningen: org.yaml/snakeyaml:1.24" level="project" />
     <orderEntry type="library" name="Leiningen: pjstadig/humane-test-output:0.10.0" level="project" />
     <orderEntry type="library" name="Leiningen: potemkin:0.4.5" level="project" />
-    <orderEntry type="library" name="Leiningen: prismatic/schema:1.1.11" level="project" />
+    <orderEntry type="library" name="Leiningen: prismatic/schema:1.1.12" level="project" />
     <orderEntry type="library" name="Leiningen: prone:2019-07-08" level="project" />
     <orderEntry type="library" name="Leiningen: realize:2019-04-24" level="project" />
     <orderEntry type="library" name="Leiningen: riddley:0.1.12" level="project" />
