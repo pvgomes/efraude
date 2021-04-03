@@ -17,3 +17,4 @@ profiles.clj
 .idea/*
 idea*
 *.DS_Store
+/docker/db/fraude-mysql
