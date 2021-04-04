@@ -1,7 +1,7 @@
 # fraude
 efraude.app is a web application, this project uses clojure as a server language and Mysql as a database, to make all things easy we use Luminus framework with Selmer as a template engine and [Bulma](https://bulma.io/) as a css
 
-[![Build Status](https://travis-ci.com/pvgomes/efraude.svg?token=Ha16hcqsZpMxYmV2Szvm&branch=main)](https://travis-ci.com/pvgomes/efraude)
+[![Build Status](https://travis-ci.org/pvgomes/efraude.svg?branch=main)](https://travis-ci.org/pvgomes/efraude)
 
 ## Prerequisites
 
