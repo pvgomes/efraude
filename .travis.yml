@@ -3,3 +3,19 @@ lein: 2.8.1
 
 jdk:
   - openjdk8
+
+services:
+  - mysql
+
+test:
+  database: efraude_test
+  username: root
+  password: efraude190
+  encoding: utf8
+
+before_install:
+  - mysql -e 'CREATE DATABASE myapp_test;'
+install:
+  - lein deps
+  - lein migrate
+  - lein run

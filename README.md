@@ -25,23 +25,21 @@ cp test-config.edn.dist test-config.edn
 ```
 
 ### Start Mysql
-```docker-compose up```
+```docker-compose up -d```
 
 ### Create fraude db and test db
 ```
-docker exec -it fraude_db_1 mysql -uroot -pefraude190 --execute="CREATE DATABASE fraude;"
-docker exec -it fraude_db_1 mysql -uroot -pefraude190 --execute="CREATE DATABASE fraude_test;"
+docker exec -it db mysql -uroot -pefraude190 --execute="CREATE DATABASE fraude;"
+docker exec -it db mysql -uroot -pefraude190 --execute="CREATE DATABASE fraude_test;"
 ```
 
-### Start web server on REPL
-```clojure
-(start)
+### Download dependencias, migrate and start web server 
+```
+lein deps
+lein run migrate
+lein run
 ```
 
-### Run migration on REPL
-```clojure
-(migrate)
-```
 
 ### Access
 access [localhost:3000](http://localhost:3000)
