@@ -10,14 +10,15 @@ networks:
         - subnet: 10.0.0.0/24
 
 services:
-  clojure:
-    build: ./docker/clojure
-    container_name: clojure
-    ports:
-      - "3000:3000"
-      - "7000:7000"
-    networks:
-      - fraude-network
+# @FIXME: Create proper dockerfile
+#  clojure:
+#    build: ./docker/clojure
+#    container_name: clojure
+#    ports:
+#      - "3000:3000"
+#      - "7000:7000"
+#    networks:
+#      - fraude-network
   db:
     image: mysql:5.7.33
     container_name: db
