@@ -17,5 +17,7 @@ before_install:
   - mysql -e 'CREATE DATABASE efraude_test;'
 install:
   - lein deps
-  - lein run migrate
-  - lein run
+#  - lein run migrate
+#  - lein run
+script:
+  - lein test fraude.test.unit.controllers.clone
