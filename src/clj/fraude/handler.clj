@@ -2,11 +2,10 @@
   (:require
    [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
    [compojure.core :refer [routes wrap-routes]]
-   [compojure.route :as route]
    [fraude.env :refer [defaults]]
    [fraude.layout :refer [error-page]]
    [fraude.middleware :as middleware]
-   [fraude.routes.home :refer [home-routes]]
+   [fraude.routes :refer [main]]
    [mount.core :as mount]
    [reitit.ring :as ring]
    [ring.middleware.content-type :refer [wrap-content-type]]
@@ -20,7 +19,7 @@
   :start
   (ring/ring-handler
    (ring/router
-    [(home-routes)])
+    [(main)])
    (ring/routes
     (ring/create-resource-handler
      {:path "/"})
