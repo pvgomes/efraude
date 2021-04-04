@@ -40,14 +40,12 @@ lein run migrate
 lein run
 ```
 
-
 ### Access
 access [localhost:3000](http://localhost:3000)
 
-
-### test
-`lein test`
-
+## before commit
+- run tests: `lein test`
+- run lint-fix: `lein lint-fix`
 
 ### For more
 Documentation and tips for development se [here](resources/docs/docs.md)

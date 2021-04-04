@@ -14,8 +14,8 @@ test:
   encoding: utf8
 
 before_install:
-  - mysql -e 'CREATE DATABASE myapp_test;'
+  - mysql -e 'CREATE DATABASE efraude_test;'
 install:
   - lein deps
-  - lein migrate
+  - lein run migrate
   - lein run
