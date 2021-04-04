@@ -45,7 +45,13 @@
   :target-path "target/%s/"
   :main ^:skip-aot fraude.core
 
-  :plugins []
+  :plugins [[lein-cloverage "1.0.13"]
+            [lein-ring "0.12.5"]
+            [lein-cljfmt "0.5.7"]
+            [lein-nsorg "0.2.0"]]
+
+  :aliases {"lint"            ["do" ["cljfmt" "check"] ["nsorg"]]
+            "lint-fix"        ["do" ["cljfmt" "fix"] ["nsorg" "--replace"]]}
 
   :profiles
   {:uberjar {:omit-source true

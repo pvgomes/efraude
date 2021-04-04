@@ -27,10 +27,10 @@
 
 (defn url-maker [entity]
   (assoc entity :url (str
-                       (:prefix entity)
-                       (:id entity)
-                       "/"
-                       (common-replace entity))))
+                      (:prefix entity)
+                      (:id entity)
+                      "/"
+                      (common-replace entity))))
 
 (defn common [entities url-prefix]
   (->> (map #(assoc % :prefix url-prefix) entities)

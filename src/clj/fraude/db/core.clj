@@ -1,17 +1,16 @@
 (ns fraude.db.core
   (:require
-    [clojure.java.jdbc :as jdbc]
-    [conman.core :as conman]
-    [java-time.pre-java8 :as jt]
-    [mount.core :refer [defstate]]
-    [fraude.config :refer [env]]))
+   [clojure.java.jdbc :as jdbc]
+   [conman.core :as conman]
+   [fraude.config :refer [env]]
+   [java-time.pre-java8 :as jt]
+   [mount.core :refer [defstate]]))
 
 (defstate ^:dynamic *db*
-          :start (conman/connect! {:jdbc-url (env :database-url)})
-          :stop (conman/disconnect! *db*))
+  :start (conman/connect! {:jdbc-url (env :database-url)})
+  :stop (conman/disconnect! *db*))
 
 (conman/bind-connection *db* "sql/queries.sql" "sql/person.sql" "sql/clone.sql")
-
 
 (extend-protocol jdbc/IResultSetReadColumn
   java.sql.Timestamp

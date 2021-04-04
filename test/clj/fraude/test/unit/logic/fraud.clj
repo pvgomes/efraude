@@ -1,8 +1,8 @@
 (ns fraude.test.unit.logic.fraud
   (:require
-    [clojure.test :refer :all]
-    [ring.mock.request :refer :all]
-    [fraude.logic.fraud :as l-fraud]))
+   [clojure.test :refer :all]
+   [fraude.logic.fraud :as l-fraud]
+   [ring.mock.request :refer :all]))
 
 (deftest test-url
   (testing "url slugify"

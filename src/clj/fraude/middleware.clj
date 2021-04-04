@@ -1,14 +1,14 @@
 (ns fraude.middleware
   (:require
-    [fraude.env :refer [defaults]]
-    [clojure.tools.logging :as log]
-    [fraude.layout :refer [error-page]]
-    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-    [fraude.middleware.formats :as formats]
-    [muuntaja.middleware :refer [wrap-format wrap-params]]
-    [fraude.config :refer [env]]
-    [ring-ttl-session.core :refer [ttl-memory-store]]
-    [ring.middleware.defaults :refer [site-defaults wrap-defaults]]))
+   [clojure.tools.logging :as log]
+   [fraude.config :refer [env]]
+   [fraude.env :refer [defaults]]
+   [fraude.layout :refer [error-page]]
+   [fraude.middleware.formats :as formats]
+   [muuntaja.middleware :refer [wrap-format wrap-params]]
+   [ring-ttl-session.core :refer [ttl-memory-store]]
+   [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+   [ring.middleware.defaults :refer [site-defaults wrap-defaults]]))
 
 (defn wrap-internal-error [handler]
   (fn [req]
@@ -22,12 +22,11 @@
 
 (defn wrap-csrf [handler]
   (wrap-anti-forgery
-    handler
-    {:error-response
-     (error-page
-       {:status 403
-        :title "Invalid anti-forgery token"})}))
-
+   handler
+   {:error-response
+    (error-page
+     {:status 403
+      :title "Invalid anti-forgery token"})}))
 
 (defn wrap-formats [handler]
   (let [wrapped (-> handler wrap-params (wrap-format formats/instance))]
@@ -39,7 +38,7 @@
 (defn wrap-base [handler]
   (-> ((:middleware defaults) handler)
       (wrap-defaults
-        (-> site-defaults
-            (assoc-in [:security :anti-forgery] false)
-            (assoc-in  [:session :store] (ttl-memory-store (* 60 30)))))
+       (-> site-defaults
+           (assoc-in [:security :anti-forgery] false)
+           (assoc-in  [:session :store] (ttl-memory-store (* 60 30)))))
       wrap-internal-error))

@@ -1,7 +1,7 @@
 (ns fraude.nrepl
   (:require
-    [nrepl.server :as nrepl]
-    [clojure.tools.logging :as log]))
+   [clojure.tools.logging :as log]
+   [nrepl.server :as nrepl]))
 
 (defn start
   "Start a network repl for debugging on specified port followed by

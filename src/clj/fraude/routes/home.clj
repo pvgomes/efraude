@@ -1,15 +1,15 @@
 (ns fraude.routes.home
   (:require
-    [fraude.layout :as layout]
-    [fraude.controllers.person :as c-person]
-    [fraude.controllers.fraud :as c-fraud]
-    [fraude.controllers.clone :as c-clone]
-    [fraude.controllers.relevance :as c-relevance]
-    [fraude.logic.xml :as l-xml]
-    [fraude.middleware :as middleware]
-    [ring.util.response :as res]
-    [ring.util.http-response :as response]
-    [cheshire.core :as json]))
+   [cheshire.core :as json]
+   [fraude.controllers.clone :as c-clone]
+   [fraude.controllers.fraud :as c-fraud]
+   [fraude.controllers.person :as c-person]
+   [fraude.controllers.relevance :as c-relevance]
+   [fraude.layout :as layout]
+   [fraude.logic.xml :as l-xml]
+   [fraude.middleware :as middleware]
+   [ring.util.http-response :as response]
+   [ring.util.response :as res]))
 
 (defn logout [req]
   (-> (res/redirect "/")
@@ -23,7 +23,7 @@
 (defn render [{:keys [flash content] :as request} & [params]]
   (if (req-user request)
     (merge params
-            {:content content
+           {:content content
             :user     (req-user request)}
            (select-keys flash [:name :message :errors]))
     (merge params
@@ -39,15 +39,15 @@
                 (assoc :session updated-session))))
       (layout/render request "entrar.html"
                      (render
-                       (assoc request :flash
-                                      (assoc params :errors {:login "usuário ou senha inválidos"})))))))
+                      (assoc request :flash
+                             (assoc params :errors {:login "usuário ou senha inválidos"})))))))
 
 (defn save-person! [{:keys [params] :as request}]
   (c-person/save! params)
   (layout/render request "entrar.html"
                  (render
-                   (assoc request :flash
-                                  (assoc params :errors {:message "usuário cadastrado"})))))
+                  (assoc request :flash
+                         (assoc params :errors {:message "usuário cadastrado"})))))
 
 (defn save-fraud! [{:keys [params]}]
   (c-fraud/save! params)
@@ -81,7 +81,7 @@
 
 (defn fraudes-page [request]
   (layout/render request "fraudes.html" (render (assoc request :content
-                                                               {:frauds (c-fraud/all)}))))
+                                                       {:frauds (c-fraud/all)}))))
 
 (defn noticias-page [request]
   (layout/render request "noticias.html" (render request)))
@@ -104,7 +104,7 @@
 (defn home-page [request]
   (layout/render request "home.html"
                  (render
-                   (assoc request :content (merge (c-fraud/dashboard) (c-clone/dashboard))))))
+                  (assoc request :content (merge (c-fraud/dashboard) (c-clone/dashboard))))))
 
 (defn termos-page [request]
   (layout/render request "termos.html" (render request)))
@@ -112,8 +112,8 @@
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
                  (render (assoc request :content
-                                        {:frauds (c-fraud/by-person (:id (req-user request)))
-                                         :clones (c-clone/by-person (:id (req-user request)))}))))
+                                {:frauds (c-fraud/by-person (:id (req-user request)))
+                                 :clones (c-clone/by-person (:id (req-user request)))}))))
 
 (defn perfil-page [request]
   (layout/render request "perfil.html" (render request)))

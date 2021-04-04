@@ -1,8 +1,8 @@
 (ns fraude.env
   (:require
-    [selmer.parser :as parser]
-    [clojure.tools.logging :as log]
-    [fraude.dev-middleware :refer [wrap-dev]]))
+   [clojure.tools.logging :as log]
+   [fraude.dev-middleware :refer [wrap-dev]]
+   [selmer.parser :as parser]))
 
 (def defaults
   {:init

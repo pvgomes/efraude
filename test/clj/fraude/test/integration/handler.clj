@@ -1,11 +1,11 @@
 (ns fraude.test.integration.handler
   (:require
-    [clojure.test :refer :all]
-    [ring.mock.request :refer :all]
-    [fraude.handler :refer :all]
-    [fraude.middleware.formats :as formats]
-    [muuntaja.core :as m]
-    [mount.core :as mount]))
+   [clojure.test :refer :all]
+   [fraude.handler :refer :all]
+   [fraude.middleware.formats :as formats]
+   [mount.core :as mount]
+   [muuntaja.core :as m]
+   [ring.mock.request :refer :all]))
 
 (defn parse-json [body]
   (m/decode formats/instance "application/json" body))

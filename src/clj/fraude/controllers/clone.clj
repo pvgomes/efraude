@@ -1,7 +1,7 @@
 (ns fraude.controllers.clone
   (:require
-    [fraude.db.core :as db]
-    [fraude.logic.clone :as l-clone]))
+   [fraude.db.core :as db]
+   [fraude.logic.clone :as l-clone]))
 
 (defn save! [{:keys [phone message cloned_at fk_person ip]}]
   (let [person_id (if (empty? fk_person)

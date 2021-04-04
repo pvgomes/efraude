@@ -1,6 +1,6 @@
 (ns fraude.schema.clone
-  (:require [schema.core :as s]
-            [fraude.schema.person :as s-person]))
+  (:require [fraude.schema.person :as s-person]
+            [schema.core :as s]))
 
 (s/defschema clone
   "clone structure"

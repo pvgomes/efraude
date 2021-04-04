@@ -1,8 +1,8 @@
 (ns fraude.controllers.person
   (:require
-    [buddy.hashers :as hashers]
-    [clojure.java.jdbc :as jdbc]
-    [fraude.db.core :as db]))
+   [buddy.hashers :as hashers]
+   [clojure.java.jdbc :as jdbc]
+   [fraude.db.core :as db]))
 
 (defn person-by-email [email]
   (db/person-by-email {:email email}))
@@ -12,16 +12,16 @@
         refresh_token (hashers/derive email)
         token (hashers/derive refresh_token)]
     (jdbc/with-db-transaction [t-conn db/*db*]
-                              (if-not (empty? (person-by-email email))
-                                (throw (ex-info "User already exists!"
-                                                {:fraude/error-id :duplicate-person
-                                                 :error "User already exists!"})))
-                              (db/create-person!* t-conn
-                                                  {:name name
-                                                   :email email
-                                                   :refresh_token refresh_token
-                                                   :token token
-                                                   :password password}))))
+      (if-not (empty? (person-by-email email))
+        (throw (ex-info "User already exists!"
+                        {:fraude/error-id :duplicate-person
+                         :error "User already exists!"})))
+      (db/create-person!* t-conn
+                          {:name name
+                           :email email
+                           :refresh_token refresh_token
+                           :token token
+                           :password password}))))
 
 (defn create-google-social! [id email name]
   (let [refresh_token (hashers/derive email)
@@ -32,9 +32,9 @@
                  :refresh_token refresh_token
                  :token token}]
     (jdbc/with-db-transaction [t-conn db/*db*]
-                              (if-not (empty? (person-by-email email))
-                                (db/update-person-google!* t-conn person)
-                                (db/create-person-google!* t-conn person)))))
+      (if-not (empty? (person-by-email email))
+        (db/update-person-google!* t-conn person)
+        (db/create-person-google!* t-conn person)))))
 
 (defn save! [{:keys [name email password]}]
   (create! name email password))

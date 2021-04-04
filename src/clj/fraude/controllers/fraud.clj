@@ -1,7 +1,7 @@
 (ns fraude.controllers.fraud
   (:require
-    [fraude.db.core :as db]
-    [fraude.logic.fraud :as l-fraud]))
+   [fraude.db.core :as db]
+   [fraude.logic.fraud :as l-fraud]))
 
 (defn save! [{:keys [name message caution fk_person url]}]
   (db/create-fraud! {:name name
@@ -16,7 +16,7 @@
         meta {:description (str "fraude reportada " fraud-name)
               :title (str "risco de fraude " fraud-name)
               :url (str "https://efraude.app" (:url (l-fraud/url-maker (assoc fraud :prefix "/fraude/"))))}]
-             (assoc fraud :meta meta)))
+    (assoc fraud :meta meta)))
 
 (defn dashboard []
   {:last (l-fraud/complete-url (db/get-frauds {:fraud_limit 5}))
@@ -48,5 +48,5 @@
   ([] (frauds-nodes (all)))
   ([frauds]
    (->> frauds
-         (l-fraud/complete-url)
-         (nodes))))
+        (l-fraud/complete-url)
+        (nodes))))
