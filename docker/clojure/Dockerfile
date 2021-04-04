@@ -20,6 +20,6 @@ EXPOSE 3000
 EXPOSE 7000
 WORKDIR /root/fraude
 ENV LEIN_ROOT "yes"
-RUN ~/bin/lein deps
-RUN ~/bin/lein run migrate
-CMD ~/bin/lein run
+#RUN ~/bin/lein deps
+#RUN ~/bin/lein run migrate
+#CMD ~/bin/lein run
