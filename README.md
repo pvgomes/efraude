@@ -40,6 +40,11 @@ lein run migrate
 lein run
 ```
 
+### or Run using REPL
+```
+(user/start)
+```
+
 ### Access
 access [localhost:3000](http://localhost:3000)
 
