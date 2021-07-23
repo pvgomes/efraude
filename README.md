@@ -44,6 +44,7 @@ lein run
 ```
 (user/start)
 ```
+[more](resources/docs/docs.md)
 
 ### Access
 access [localhost:3000](http://localhost:3000)

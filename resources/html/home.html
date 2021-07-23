@@ -56,10 +56,10 @@
                     <p class="">
                     <div class="field has-addons">
                         <div class="control">
-                            <input class="input" type="text" onclick="searchPhone()" placeholder="digite um telefone..">
+                            <input class="input phone" type="text" placeholder="digite um telefone..">
                         </div>
                         <div class="control">
-                            <a class="button is-info">
+                            <a class="button is-info" onclick="searchPhone()">
                                 Buscar
                             </a>
                         </div>
@@ -113,7 +113,9 @@
 </div>
 <script>
 function searchPhone() {
-  alert("esta funcionalidade esta em desenvolvimento ainda, por enquanto utilize o google para buscar se seu número foi clonado");
+ var phone = document.querySelector( ".phone" );
+document.location.href = '/busca-whatsapp-clonado/'
++ phone.value;
 }
 </script>
 </script>

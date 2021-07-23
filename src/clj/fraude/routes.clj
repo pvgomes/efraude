@@ -101,6 +101,12 @@
        (render)
        (layout/render request "fraude.html")))
 
+(defn search-clone-page [{:keys [path-params] :as request}]
+  (->> (c-clone/search-clone path-params)
+       (assoc request :content)
+       (render)
+       (layout/render request "fraude.html")))
+
 (defn home-page [request]
   (layout/render request "home.html"
                  (render
@@ -141,6 +147,7 @@
    ["/perfil" {:get perfil-page}]
    ["/fraude/:id/:title" {:get fraude-page}]
    ["/whatsapp-clonado/:id/:title" {:get clone-page}]
+   ["/busca-whatsapp-clonado/:phone" {:get search-clone-page}]
    ["/person/add" {:post save-person!}]
    ["/fraud/add" {:post save-fraud!}]
    ["/clone/add" {:post save-clone!}]

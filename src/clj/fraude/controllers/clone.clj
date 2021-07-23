@@ -22,6 +22,11 @@
               :url (str "https://efraude.app" (:url (l-clone/url-maker (assoc clone :prefix "/whatsapp-clonado/"))))}]
     (assoc clone :meta meta)))
 
+(defn search-clone [phone]
+  (let [clone (db/search-clone phone)
+        clone-phone (:prone clone)]
+    (print clone)))
+
 (defn dashboard []
   {:clones (l-clone/complete-url (db/get-clones {:clone_limit 5}))})
 
