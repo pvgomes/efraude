@@ -23,9 +23,9 @@
     (assoc clone :meta meta)))
 
 (defn search-clone [phone]
-  (let [clone (db/search-clone phone)
-        clone-phone (:prone clone)]
-    (print clone)))
+  (let [clone (db/search-clone
+                {:phone (str "%" (:phone phone) "%")})]
+    clone))
 
 (defn dashboard []
   {:clones (l-clone/complete-url (db/get-clones {:clone_limit 5}))})
