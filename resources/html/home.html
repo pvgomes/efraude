@@ -111,12 +111,26 @@
         </div>
     </section>
 </div>
+<script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
+<script type='text/javascript' src='//code.jquery.com/jquery-compat-git.js'></script>
+<script type='text/javascript' src='//igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js'></script>
 <script>
 function searchPhone() {
  var phone = document.querySelector( ".phone" );
 document.location.href = '/busca-whatsapp-clonado/'
 + phone.value;
 }
-</script>
+
+
+var behavior = function (val) {
+    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+},
+options = {
+    onKeyPress: function (val, e, field, options) {
+        field.mask(behavior.apply({}, arguments), options);
+    }
+};
+
+$('.phone').mask(behavior, options);
 </script>
 {% endblock %}
