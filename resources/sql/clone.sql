@@ -18,7 +18,9 @@ WHERE id = :id
 -- :name search-clone :? :1
 -- :doc retrieves a clones record given the phone
 SELECT * FROM clone
-WHERE phone LIKE '%:phone%'
+WHERE phone LIKE :phone
+order by created_at desc
+limit 1
 
 -- :name clones-by-person :? :*
 -- :doc get clones by person
