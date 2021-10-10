@@ -1,23 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Something Bad Happened</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% style "/assets/bulma/css/bulma.min.css" %}
-</head>
-<body>
-<div class="container is-fluid">
-    <div class="has-text-centered">
-        <h1><span class="is-size-4 has-text-danger">Error: {{status}}</span></h1>
-        <hr>
-        {% if title %}
-        <h2 class="without-margin">{{title}}</h2>
-        {% endif %}
-        {% if message %}
-        <h4 class="text-danger">{{message}}</h4>
-        {% endif %}
+{% extends "base.html" %}
+​     {% block content %}
+{% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
+<div class=​"content"​>
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <div class=​"column"​>
+                <h2 class="title">Ooopsss... parece que tem algo errado aqui</h2>
+
+                <div class="has-text-centered">
+                    <h1><span class="is-size-4 has-text-danger">Erro: {{status}}</span></h1>
+                    <hr>
+                    {% if title %}
+                    <h2 class="without-margin">{{title}}</h2>
+                    {% endif %}
+                    {% if message %}
+                    <h4 class="text-danger">{{message}}</h4>
+                    {% endif %}
+                </div>
+            </div>
+             
+        </div>
+        ​ 
     </div>
+    ​ 
 </div>
-</body>
-</html>
+​     {% endblock %}
+
+
