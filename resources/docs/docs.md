@@ -27,3 +27,11 @@ when you update .sql files
 (in-ns 'fraude.controllers.fraud)
 (save! {:name "vencendo" :message "cuidado" :fk_person "1"})
 ```
+
+
+### Frontend
+nowdays we're using a simple front end with html5, [vanilla js](http://vanilla-js.com/) and [bulma css framework](https://bulma.io/), 
+here you'll see some tips and tricks about frontend on efraude.
+
+#### Icons
+To get icons search [here](https://fontawesome.com/)
