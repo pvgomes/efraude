@@ -44,3 +44,10 @@
 
 (defn complete-url [frauds]
   (common frauds "/fraude/"))
+
+(defn fraud-chances [relevances]
+  "get fraud relevance"
+  (let [chances {:low {:class "is-success" :text "baixa"}
+                 :medium {:class "is-warning" :text "media"}
+                 :high {:class "is-danger" :text "alta"}}]
+    (:high chances)))

@@ -60,3 +60,8 @@ select count(relevance.id)
 from relevance
 where relevance.fk_fraud = :fraud_id
 and relevance.type = :type
+
+-- :name get-relevances-by-fraud :? :*
+-- :doc get relevances by fraud id
+SELECT * from relevance
+WHERE fk_fraud = :id

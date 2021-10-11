@@ -41,8 +41,9 @@
                                 {% endif %}
 
                                 {% if content.name %}
+                                <!-- chances to be fraud -->
                                     <strong>chances de ser fraude: </strong>
-                                    <span class="tag is-danger">Alta</span>
+                                    <span class="tag {{ content.fraud-chances.class }}">{{ content.fraud-chances.text }}</span>
                                 {% else %}
                                 <!--        we need to use those status to warn if it is still cloned                        {{ content.status }}-->
                             <div class="notification">

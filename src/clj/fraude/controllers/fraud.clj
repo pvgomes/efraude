@@ -15,8 +15,10 @@
         fraud-name (:name fraud)
         meta {:description (str "fraude reportada " fraud-name)
               :title (str "risco de fraude " fraud-name)
-              :url (str "https://efraude.app" (:url (l-fraud/url-maker (assoc fraud :prefix "/fraude/"))))}]
-    (assoc fraud :meta meta)))
+              :url (str "https://efraude.app" (:url (l-fraud/url-maker (assoc fraud :prefix "/fraude/"))))}
+        fraud-chances (l-fraud/fraud-chances (db/get-relevances-by-fraud id))]
+    (assoc fraud :meta meta)
+    (assoc fraud :fraud-chances fraud-chances)))
 
 (defn dashboard []
   {:last (l-fraud/complete-url (db/get-frauds {:fraud_limit 5}))
