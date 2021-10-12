@@ -28,6 +28,13 @@ when you update .sql files
 (save! {:name "vencendo" :message "cuidado" :fk_person "1"})
 ```
 
+### Unit tests
+you can run all tests
+`lein test`
+
+or isolate one, eg:
+`lein test :only fraude.test.unit.logic.fraud/test-chances-to-be-fraud`
+
 
 ### Frontend
 nowdays we're using a simple front end with html5, [vanilla js](http://vanilla-js.com/) and [bulma css framework](https://bulma.io/), 

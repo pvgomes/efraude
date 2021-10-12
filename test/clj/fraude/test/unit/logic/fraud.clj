@@ -151,3 +151,24 @@
                      :fk_person 1,
                      :prefix "/fraude/"}]]
       (is (= (l-fraud/complete-url frauds) expected)))))
+
+(deftest test-chances-to-be-fraud
+  (testing "logic height"
+    (let [relevances '({:fk_fraud 3, :type "positive"}
+                       {:fk_fraud 3, :type "positive"}
+                       {:fk_fraud 3, :type "positive"})]
+
+      (is (= {:class "is-danger" :text "alta"} (l-fraud/fraud-chances relevances)))))
+
+  (testing "2 negatives should be medium because of tie rule"
+    (let [relevances '({:fk_fraud 3, :type "negative"}
+                       {:fk_fraud 3, :type "negative"})]
+
+      (is (= {:class "is-warning" :text "media"} (l-fraud/fraud-chances relevances)))))
+
+  (testing "case of more negatives"
+    (let [relevances '({:fk_fraud 3, :type "negative"}
+                       {:fk_fraud 3, :type "negative"}
+                       {:fk_fraud 3, :type "negative"})]
+
+      (is (= {:class "is-success" :text "baixa"} (l-fraud/fraud-chances relevances))))))

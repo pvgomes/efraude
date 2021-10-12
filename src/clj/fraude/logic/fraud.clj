@@ -45,9 +45,41 @@
 (defn complete-url [frauds]
   (common frauds "/fraude/"))
 
+(defn vote-positive? [relevance]
+  (if (= "positive" (:type relevance))
+    true
+    false))
+
+(defn vote-negative? [relevance]
+  (if (= "negative" (:type relevance))
+    true
+    false))
+
+(def fraud-default-value
+  2)
+
 (defn fraud-chances [relevances]
-  "get fraud relevance"
+  "get fraud relevance
+  criteria:
+  we use a simple math of sum, each vote has a value of one
+  the fraud by itself has a value of two positive votes,
+  which means that one fraud with one negative vote has a high chances to be fraud (- 2 1) = 1
+  when the votes tie the chances is medium (- 2 2) = 0
+  when theres more votes with negative the chances is low (- 2 3) = -1
+  "
   (let [chances {:low {:class "is-success" :text "baixa"}
                  :medium {:class "is-warning" :text "media"}
-                 :high {:class "is-danger" :text "alta"}}]
-    (:high chances)))
+                 :high {:class "is-danger" :text "alta"}}
+        quantity-positives (->> relevances
+                                (filter vote-positive?)
+                                (count)
+                                (+ fraud-default-value))
+        quantity-negatives (->> relevances
+                                (filter vote-negative?)
+                                (count))
+        balance (- quantity-positives quantity-negatives)]
+    (if (zero? balance)
+      (:medium chances)
+      (if (> balance 0)
+        (:high chances)
+        (:low chances)))))
