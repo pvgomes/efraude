@@ -115,13 +115,13 @@
 
 (defn termos-page [request]
   (layout/render request "cms.html"
-                 (render (assoc request :content {:cms (c-cms/termos)}
-                                                 {:meta {:title "termos do uso do efraude"}}))))
+                 (render (assoc request :content {:cms (c-cms/termos)
+                                                  :meta {:title "termos do uso do efraude"}}))))
 
 (defn donate-page [request]
   (layout/render request "cms.html"
-                 (render (assoc request :content {:cms (c-cms/donate)}
-                                        {:meta {:title "ajude o efraude a continuar no ar, doe qualquer quantia"}}))))
+                 (render (assoc request :content {:cms (c-cms/donate)
+                                                  :meta {:title "ajude o efraude a continuar no ar, doe qualquer quantia"}}))))
 
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
