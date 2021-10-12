@@ -1,5 +1,7 @@
 (ns fraude.logic.fraud
-  (:require [clojure.string :as s])
+  (:require [fraude.schema.relevance :as s-relevance]
+            [clojure.string :as str]
+            [schema.core :as s])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (defn- trim-to [string-to-trim trim-value]
@@ -7,8 +9,8 @@
 
 (defn- normalize [string-to-normalize]
   (let [normalized (Normalizer/normalize string-to-normalize Normalizer$Form/NFD)
-        ascii (s/replace normalized #"[\P{ASCII}]+" "")]
-    (s/lower-case ascii)))
+        ascii (str/replace normalized #"[\P{ASCII}]+" "")]
+    (str/lower-case ascii)))
 
 (defn slugify
   "Returns a slugified string. Takes two optional parameters:
@@ -45,12 +47,14 @@
 (defn complete-url [frauds]
   (common frauds "/fraude/"))
 
-(defn vote-positive? [relevance]
+(s/defn vote-positive? :- s/Bool
+  [relevance :- s-relevance/relevance]
   (if (= "positive" (:type relevance))
     true
     false))
 
-(defn vote-negative? [relevance]
+(s/defn vote-negative? :- s/Bool
+  [relevance :- s-relevance/relevance]
   (if (= "negative" (:type relevance))
     true
     false))
@@ -58,7 +62,8 @@
 (def fraud-default-value
   2)
 
-(defn fraud-chances [relevances]
+(s/defn fraud-chances
+  [relevances :- [s-relevance/relevance]]
   "get fraud relevance
   criteria:
   we use a simple math of sum, each vote has a value of one

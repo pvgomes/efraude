@@ -171,4 +171,9 @@
                        {:fk_fraud 3, :type "negative"}
                        {:fk_fraud 3, :type "negative"})]
 
-      (is (= {:class "is-success" :text "baixa"} (l-fraud/fraud-chances relevances))))))
+      (is (= {:class "is-success" :text "baixa"} (l-fraud/fraud-chances relevances)))))
+
+  (testing "case without votes"
+    (let [relevances '()]
+
+      (is (= {:class "is-danger" :text "alta"} (l-fraud/fraud-chances relevances))))))
