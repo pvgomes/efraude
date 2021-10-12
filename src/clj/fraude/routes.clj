@@ -5,6 +5,7 @@
     [fraude.controllers.fraud :as c-fraud]
     [fraude.controllers.person :as c-person]
     [fraude.controllers.relevance :as c-relevance]
+    [fraude.controllers.cms :as c-cms]
     [fraude.layout :as layout]
     [fraude.logic.xml :as l-xml]
     [fraude.middleware :as middleware]
@@ -113,7 +114,14 @@
                    (assoc request :content (merge (c-fraud/dashboard) (c-clone/dashboard))))))
 
 (defn termos-page [request]
-  (layout/render request "termos.html" (render request)))
+  (layout/render request "cms.html"
+                 (render (assoc request :content {:cms (c-cms/termos)}
+                                                 {:meta {:title "termos do uso do efraude"}}))))
+
+(defn donate-page [request]
+  (layout/render request "cms.html"
+                 (render (assoc request :content {:cms (c-cms/donate)}
+                                        {:meta {:title "ajude o efraude a continuar no ar, doe qualquer quantia"}}))))
 
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
@@ -143,6 +151,7 @@
    ["/noticias" {:get noticias-page}]
    ["/denuncie" {:get denuncie-page}]
    ["/termos" {:get termos-page}]
+   ["/doe" {:get donate-page}]
    ["/suas-denuncias" {:get denuncias-page}]
    ["/perfil" {:get perfil-page}]
    ["/fraude/:id/:title" {:get fraude-page}]
