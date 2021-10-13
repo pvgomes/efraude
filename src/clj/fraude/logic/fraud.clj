@@ -20,8 +20,8 @@
   ([string-to-slugify delimiter] (slugify string-to-slugify delimiter 250))
   ([string-to-slugify delimiter trim-value]
    (let [normalized (normalize string-to-slugify)
-         split-s (s/split (s/triml normalized) #"[\p{Space}\p{P}]+")
-         combined (s/join delimiter split-s)]
+         split-s (str/split (str/triml normalized) #"[\p{Space}\p{P}]+")
+         combined (str/join delimiter split-s)]
      (trim-to combined trim-value))))
 
 (defn common-replace [data]
