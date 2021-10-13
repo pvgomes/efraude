@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+​     {% block content %}
+{% include "partial/menu.html" with name="Jane Doe" greeting="Hello!" %}
+<div class=​"content"​>
+    <div class="columns is-centered">
+        <div class="column is-two-thirds">
+            <!-- content -->
+            {{ content.cms|safe }}
+        </div>
+        ​ 
+    </div>
+    ​ 
+</div>
+​     {% endblock %}
+
+
