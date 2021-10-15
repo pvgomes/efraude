@@ -4,23 +4,26 @@
 
         <div class="field has-addons">
             <div class="control">
-                <input class="input" type="text" id="myInput" onkeyup="searchFraud()" placeholder="Buscar fraude..">
+                <input class="input" type="text" id="myInput" onkeyup="searchFraud()" placeholder="Buscar..">
             </div>
             <div class="control">
                 <a class="button is-info">
                     Buscar
                 </a>
             </div>
-            <div class="control">
-                <a href="/denuncie" class="button is-danger">
-                    Denuncie
-                </a>
-            </div>
         </div>
         <p>
         <ul id="myUL">
-            {% for item in content.frauds %}
-            <li><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></li>
+            {% for item in content.items %}
+
+                {% if item.phone %}
+                    <li><a href="{{item.url}}" title="{{item.name}}">{{item.phone}} clonado dia {{item.cloned_at|date:"dd/MM/yyyy"}} </a></li>
+
+                {% else %}
+                    <li><a href="{{item.url}}" title="{{item.name}}">{{item.name}}</a></li>
+                {% endif %}
+
+
             {% endfor %}
         </ul>
         </p>
