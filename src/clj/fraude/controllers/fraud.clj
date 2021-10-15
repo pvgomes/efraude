@@ -14,7 +14,7 @@
   (let [fraud (db/get-fraud id)
         fraud-name (:name fraud)
         meta {:description (str "fraude reportada " fraud-name)
-              :title (str "risco de fraude " fraud-name)
+              :title (str fraud-name " - efraude")
               :url (str "https://efraude.app" (:url (l-fraud/url-maker (assoc fraud :prefix "/fraude/"))))}
         fraud-chances (l-fraud/fraud-chances (db/get-relevances-by-fraud id))]
     (-> fraud

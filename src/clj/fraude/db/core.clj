@@ -10,7 +10,7 @@
   :start (conman/connect! {:jdbc-url (env :database-url)})
   :stop (conman/disconnect! *db*))
 
-(conman/bind-connection *db* "sql/queries.sql" "sql/person.sql" "sql/clone.sql")
+(conman/bind-connection *db* "sql/fraud.sql" "sql/person.sql" "sql/clone.sql")
 
 (extend-protocol jdbc/IResultSetReadColumn
   java.sql.Timestamp
