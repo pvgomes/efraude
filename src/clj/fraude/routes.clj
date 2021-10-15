@@ -81,9 +81,11 @@
   (layout/render request "registrar-clone.html" (render request)))
 
 (defn fraudes-page [request]
-  (layout/render request "fraudes.html" (render (assoc request :content
-                                                               {:frauds (c-fraud/all)}))))
-
+  (layout/render request "list.html" (render (assoc request :content
+                                                               {:items (c-fraud/all)}))))
+(defn clones-page [request]
+  (layout/render request "list.html"
+                 (render (assoc request :content {:items (c-clone/all)}))))
 (defn noticias-page [request]
   (layout/render request "noticias.html" (render request)))
 
@@ -148,6 +150,7 @@
    ["/registrar" {:get registrar-page}]
    ["/registrar-clone-de-whatsapp" {:get registrar-clone-de-whatsapp-page}]
    ["/fraudes" {:get fraudes-page}]
+   ["/clones-de-whatsapp" {:get clones-page}]
    ["/noticias" {:get noticias-page}]
    ["/denuncie" {:get denuncie-page}]
    ["/termos" {:get termos-page}]
