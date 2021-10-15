@@ -16,7 +16,7 @@
 
 (defn get-clone [id]
   (let [clone (db/get-clone id)
-        clone-phone (:prone clone)
+        clone-phone (:phone clone)
         meta {:description (str "o número " clone-phone " teve o WhatsApp clonado, não transfira valores nem dê informações pessoais")
               :title (str "Whatsapp clonado " clone-phone)
               :url (str "https://efraude.app" (:url (l-clone/url-maker (assoc clone :prefix "/whatsapp-clonado/"))))}]
