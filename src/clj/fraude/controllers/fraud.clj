@@ -1,7 +1,8 @@
 (ns fraude.controllers.fraud
   (:require
    [fraude.db.core :as db]
-   [fraude.logic.fraud :as l-fraud]))
+   [fraude.logic.fraud :as l-fraud]
+   [fraude.logic.seo :as l-seo]))
 
 (defn save! [{:keys [name message caution fk_person url]}]
   (db/create-fraud! {:name name
@@ -12,10 +13,7 @@
 
 (defn get-fraud [id]
   (let [fraud (db/get-fraud id)
-        fraud-name (:name fraud)
-        meta {:description (str "fraude reportada " fraud-name)
-              :title (str fraud-name " - efraude")
-              :url (str "https://efraude.app" (:url (l-fraud/url-maker (assoc fraud :prefix "/fraude/"))))}
+        meta (l-seo/fraud fraud)
         fraud-chances (l-fraud/fraud-chances (db/get-relevances-by-fraud id))]
     (-> fraud
         (assoc :meta meta)

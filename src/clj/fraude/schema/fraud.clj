@@ -11,3 +11,10 @@
    :url s/Str
    :created_at s/Str
    :updated_at s/Str})
+
+
+(s/defschema seo
+  "Fraud seo structure"
+  {:title s/Str
+   :description s/Str
+   :url s/Str})
