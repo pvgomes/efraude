@@ -7,3 +7,16 @@
 
 (defn donate []
   (l-seo/donate))
+
+(defn clones []
+  (l-seo/clones))
+
+(defn frauds []
+  (l-seo/frauds))
+
+(defn report-fraud []
+  (l-seo/report-fraud))
+
+(defn report-clone []
+  (l-seo/report-clone))
+

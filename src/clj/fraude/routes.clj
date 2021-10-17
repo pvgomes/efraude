@@ -79,19 +79,23 @@
   (layout/render request "registrar.html" (render request)))
 
 (defn registrar-clone-de-whatsapp-page [request]
-  (layout/render request "registrar-clone.html" (render request)))
+  (layout/render request "registrar-clone.html"
+                 (render (assoc request :content (:meta (c-seo/report-clone))))))
 
 (defn fraudes-page [request]
   (layout/render request "list.html" (render (assoc request :content
-                                                               {:items (c-fraud/all)}))))
+                                                               {:items (c-fraud/all)
+                                                                :meta (c-seo/frauds)}))))
 (defn clones-page [request]
   (layout/render request "list.html"
-                 (render (assoc request :content {:items (c-clone/all)}))))
+                 (render (assoc request :content {:items (c-clone/all)
+                                                  :meta (c-seo/clones)}))))
 (defn noticias-page [request]
   (layout/render request "noticias.html" (render request)))
 
 (defn denuncie-page [request]
-  (layout/render request "denuncie.html" (render request)))
+  (layout/render request "denuncie.html"
+                 (render (assoc request :content (:meta (c-seo/report-fraud))))))
 
 (defn fraude-page [{:keys [path-params] :as request}]
   (->> (c-fraud/get-fraud path-params)
