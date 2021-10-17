@@ -6,10 +6,9 @@
     [fraude.controllers.person :as c-person]
     [fraude.controllers.relevance :as c-relevance]
     [fraude.controllers.cms :as c-cms]
+    [fraude.controllers.xml :as c-xml]
+    [fraude.controllers.seo :as c-seo]
     [fraude.layout :as layout]
-    ;the routes should'nt access logic, never. fix it
-    [fraude.logic.xml :as l-xml]
-    [fraude.logic.seo :as l-seo]
     [fraude.middleware :as middleware]
     [ring.util.http-response :as response]
     [ring.util.response :as res]))
@@ -71,7 +70,7 @@
   (layout/response-raw))
 
 (defn sitemap [request]
-  (layout/response-xml (l-xml/xml-sitemap)))
+  (layout/response-xml (c-xml/sitemap)))
 
 (defn entrar-page [request]
   (layout/render request "entrar.html" (render request)))
@@ -120,12 +119,12 @@
 (defn termos-page [request]
   (layout/render request "cms.html"
                  (render (assoc request :content {:cms (c-cms/termos)
-                                                  :meta (l-seo/terms)}))))
+                                                  :meta (c-seo/terms)}))))
 
 (defn donate-page [request]
   (layout/render request "cms.html"
                  (render (assoc request :content {:cms (c-cms/donate)
-                                                  :meta (l-seo/donate)}))))
+                                                  :meta (c-seo/donate)}))))
 
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
