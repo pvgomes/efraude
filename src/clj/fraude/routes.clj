@@ -7,7 +7,9 @@
     [fraude.controllers.relevance :as c-relevance]
     [fraude.controllers.cms :as c-cms]
     [fraude.layout :as layout]
+    ;the routes should'nt access logic, never. fix it
     [fraude.logic.xml :as l-xml]
+    [fraude.logic.seo :as l-seo]
     [fraude.middleware :as middleware]
     [ring.util.http-response :as response]
     [ring.util.response :as res]))
@@ -118,12 +120,12 @@
 (defn termos-page [request]
   (layout/render request "cms.html"
                  (render (assoc request :content {:cms (c-cms/termos)
-                                                  :meta {:title "termos do uso do efraude"}}))))
+                                                  :meta (l-seo/terms)}))))
 
 (defn donate-page [request]
   (layout/render request "cms.html"
                  (render (assoc request :content {:cms (c-cms/donate)
-                                                  :meta {:title "ajude o efraude a continuar no ar, doe qualquer quantia"}}))))
+                                                  :meta (l-seo/donate)}))))
 
 (defn denuncias-page [request]
   (layout/render request "denuncias.html"
