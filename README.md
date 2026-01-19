@@ -133,7 +133,7 @@ The easiest way to run the entire stack locally:
 
 ```bash
 # Start all services (Postgres, Kafka, Zookeeper, Application)
-docker-compose up --build
+docker compose up
 
 # The application will be available at http://localhost:8080
 ```
@@ -151,7 +151,7 @@ If you prefer to run services separately:
 
 ```bash
 # Start only Postgres and Kafka
-docker-compose up postgres kafka zookeeper
+docker compose up postgres kafka zookeeper
 
 # Run the Spring Boot app locally
 mvn spring-boot:run -Dspring-boot.run.profiles=local
