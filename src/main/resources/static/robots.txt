@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /web/auth/
+Disallow: /web/admin/
+
+Sitemap: https://efraude.com/sitemap.xml
