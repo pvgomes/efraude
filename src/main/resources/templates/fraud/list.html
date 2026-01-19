@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{frauds.list.title} + ' - efraude'">Fraud Reports - efraude</title>
+    <meta name="description" th:content="#{frauds.list.description}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <h1 th:text="#{frauds.list.heading}">Fraud Reports</h1>
+
+        <!-- Search and Filter -->
+        <div class="search-filter-container">
+            <form th:action="@{/web/frauds}" method="get" class="search-form">
+                <input type="text" name="q" th:value="${query}" th:placeholder="#{frauds.list.search.placeholder}" class="search-input">
+                <select name="country" class="country-select">
+                    <option value="" th:text="#{frauds.list.filter.allCountries}">All Countries</option>
+                    <option value="GLOBAL" th:selected="${country == 'GLOBAL'}" th:text="#{frauds.list.filter.global}">Global</option>
+                    <option value="USA" th:selected="${country == 'USA'}">USA</option>
+                    <option value="Brazil" th:selected="${country == 'Brazil'}">Brazil</option>
+                    <option value="UK" th:selected="${country == 'UK'}">UK</option>
+                </select>
+                <button type="submit" class="btn btn-primary" th:text="#{frauds.list.search.button}">Search</button>
+            </form>
+        </div>
+
+        <!-- Fraud List -->
+        <div class="fraud-list" th:if="${frauds != null && !frauds.isEmpty()}">
+            <div class="fraud-card" th:each="fraud : ${frauds}">
+                <div class="fraud-card-header">
+                    <h2><a th:href="@{/web/frauds/{id}-{slug}(id=${fraud.id}, slug=${fraud.slug})}" th:text="${fraud.title}"></a></h2>
+                    <span class="fraud-country badge" th:text="${fraud.country}"></span>
+                    <span th:if="${fraud.status.name() == 'ARCHIVED'}" class="badge badge-danger" th:text="#{frauds.status.archived}">Archived</span>
+                </div>
+                <p class="fraud-description" th:text="${#strings.abbreviate(fraud.description, 300)}"></p>
+                <div class="fraud-meta">
+                    <span th:text="#{frauds.list.reportedBy} + ' ' + ${fraud.createdBy.name}"></span>
+                    <span>•</span>
+                    <span th:text="${#temporals.format(fraud.createdAt, 'MMM dd, yyyy')}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${frauds == null || frauds.isEmpty()}" class="empty-state">
+            <p th:text="#{frauds.list.empty}">No fraud reports found.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" th:if="${frauds != null && frauds.totalPages > 1}">
+            <a th:if="${currentPage > 0}"
+               th:href="@{/web/frauds(page=${currentPage - 1}, q=${query}, country=${country})}"
+               class="btn btn-secondary"
+               th:text="#{pagination.previous}">Previous</a>
+
+            <span class="page-info" th:text="#{pagination.page} + ' ' + ${currentPage + 1} + ' ' + #{pagination.of} + ' ' + ${frauds.totalPages}"></span>
+
+            <a th:if="${currentPage < frauds.totalPages - 1}"
+               th:href="@{/web/frauds(page=${currentPage + 1}, q=${query}, country=${country})}"
+               class="btn btn-secondary"
+               th:text="#{pagination.next}">Next</a>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <footer th:fragment="footer" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>efraude</h3>
+                    <p th:text="#{footer.tagline}">Report frauds and scams to help others stay safe</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4 th:text="#{footer.links}">Links</h4>
+                    <ul>
+                        <li><a th:href="@{/web/home}" th:text="#{nav.home}">Home</a></li>
+                        <li><a th:href="@{/web/frauds}" th:text="#{nav.frauds}">Frauds</a></li>
+                        <li><a th:href="@{/web/about}" th:text="#{nav.about}">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <p>&copy; 2025 efraude. <span th:text="#{footer.rights}">All rights reserved.</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

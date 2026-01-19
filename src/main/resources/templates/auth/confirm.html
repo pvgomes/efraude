@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{auth.confirm.title} + ' - efraude'">Email Confirmation - efraude</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <div class="auth-container">
+            <div th:if="${confirmed}" class="confirmation-success">
+                <h1 th:text="#{auth.confirm.success.heading}">✓ Email Confirmed!</h1>
+                <p th:text="#{auth.confirm.success.message}">Your email has been successfully confirmed. You can now login to your account.</p>
+                <a th:href="@{/web/auth/login}" class="btn btn-primary btn-large" th:text="#{auth.confirm.success.loginBtn}">Go to Login</a>
+            </div>
+
+            <div th:unless="${confirmed}" class="confirmation-error">
+                <h1 th:text="#{auth.confirm.error.heading}">✗ Confirmation Failed</h1>
+                <p th:text="#{auth.confirm.error.message}">The confirmation link is invalid or has expired. Please request a new confirmation email.</p>
+                <a th:href="@{/web/auth/resend}" class="btn btn-primary btn-large" th:text="#{auth.confirm.error.resendBtn}">Resend Confirmation</a>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

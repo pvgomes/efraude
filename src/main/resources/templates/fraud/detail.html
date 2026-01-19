@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${fraud.title} + ' - efraude'"></title>
+    <meta name="description" th:content="${#strings.abbreviate(fraud.description, 160)}">
+
+    <link rel="canonical" th:href="'https://efraude.com/web/frauds/' + ${fraud.id} + '-' + ${fraud.slug}">
+
+    <link rel="alternate" hreflang="en" th:href="'https://efraude.com/web/frauds/' + ${fraud.id} + '-' + ${fraud.slug}">
+    <link rel="alternate" hreflang="pt-BR" th:href="'https://efraude.com/web/frauds/' + ${fraud.id} + '-' + ${fraud.slug}">
+
+    <meta property="og:title" th:content="${fraud.title}">
+    <meta property="og:description" th:content="${#strings.abbreviate(fraud.description, 160)}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" th:content="'https://efraude.com/web/frauds/' + ${fraud.id} + '-' + ${fraud.slug}">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <div class="fraud-detail">
+            <!-- Archived Banner -->
+            <div th:if="${fraud.status.name() == 'ARCHIVED'}" class="alert alert-danger">
+                <strong th:text="#{fraud.archived.banner}">⚠ This fraud report has been archived</strong>
+            </div>
+
+            <!-- Fraud Header -->
+            <div class="fraud-header">
+                <h1 th:text="${fraud.title}"></h1>
+                <div class="fraud-badges">
+                    <span class="badge" th:text="${fraud.country}"></span>
+                    <span th:if="${score.likelyFraud}" class="badge badge-warning" th:text="#{fraud.badge.likelyFraud}">Likely Fraud</span>
+                </div>
+            </div>
+
+            <!-- Fraud Score -->
+            <div class="fraud-score">
+                <div class="score-display">
+                    <span class="score-number" th:text="${score.score}"></span>
+                    <span class="score-label" th:text="#{fraud.score.label}">Score</span>
+                </div>
+                <div class="vote-stats">
+                    <span th:text="${score.upvotes} + ' ' + #{fraud.votes.up}"></span>
+                    <span>•</span>
+                    <span th:text="${score.downvotes} + ' ' + #{fraud.votes.down}"></span>
+                </div>
+
+                <!-- Vote Buttons -->
+                <div sec:authorize="isAuthenticated()" class="vote-buttons">
+                    <form th:action="@{/api/frauds/{id}/votes(id=${fraud.id})}" method="post"
+                          hx-post th:hx-post="@{/api/frauds/{id}/votes(id=${fraud.id})}"
+                          hx-trigger="submit"
+                          hx-swap="none">
+                        <input type="hidden" name="type" value="UP">
+                        <button type="submit" class="btn btn-vote" th:classappend="${userVote != null && userVote.type.name() == 'UP' ? 'active' : ''}" th:text="#{fraud.vote.upvote}">
+                            👍 Upvote
+                        </button>
+                    </form>
+
+                    <form th:action="@{/api/frauds/{id}/votes(id=${fraud.id})}" method="post"
+                          hx-post th:hx-post="@{/api/frauds/{id}/votes(id=${fraud.id})}"
+                          hx-trigger="submit"
+                          hx-swap="none">
+                        <input type="hidden" name="type" value="DOWN">
+                        <button type="submit" class="btn btn-vote" th:classappend="${userVote != null && userVote.type.name() == 'DOWN' ? 'active' : ''}" th:text="#{fraud.vote.downvote}">
+                            👎 Downvote
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Fraud Description -->
+            <section class="fraud-section">
+                <h2 th:text="#{fraud.section.description}">Description</h2>
+                <p th:text="${fraud.description}" class="fraud-text"></p>
+            </section>
+
+            <!-- Caution Section -->
+            <section class="fraud-section" th:if="${fraud.caution != null && !fraud.caution.isEmpty()}">
+                <h2 th:text="#{fraud.section.caution}">How to Avoid</h2>
+                <div class="caution-box">
+                    <p th:text="${fraud.caution}"></p>
+                </div>
+            </section>
+
+            <!-- Related URL -->
+            <section class="fraud-section" th:if="${fraud.url != null && !fraud.url.isEmpty()}">
+                <h2 th:text="#{fraud.section.url}">Related URL</h2>
+                <p><a th:href="${fraud.url}" target="_blank" rel="noopener noreferrer" th:text="${fraud.url}"></a></p>
+            </section>
+
+            <!-- Fraud Meta -->
+            <div class="fraud-meta-info">
+                <p th:text="#{fraud.meta.reportedBy} + ' ' + ${fraud.createdBy.name}"></p>
+                <p th:text="#{fraud.meta.reportedOn} + ' ' + ${#temporals.format(fraud.createdAt, 'MMMM dd, yyyy')}"></p>
+            </div>
+
+            <!-- Comments Section -->
+            <section class="comments-section">
+                <h2 th:text="#{fraud.comments.title}">Comments</h2>
+
+                <!-- Comment Form -->
+                <div sec:authorize="isAuthenticated()" class="comment-form">
+                    <form th:action="@{/api/frauds/{id}/comments(id=${fraud.id})}" method="post">
+                        <textarea name="message" th:placeholder="#{fraud.comments.placeholder}" rows="4" required></textarea>
+                        <button type="submit" class="btn btn-primary" th:text="#{fraud.comments.submit}">Post Comment</button>
+                    </form>
+                </div>
+
+                <div sec:authorize="!isAuthenticated()" class="auth-prompt">
+                    <p th:text="#{fraud.comments.loginPrompt}">Please <a th:href="@{/web/auth/login}">login</a> to comment.</p>
+                </div>
+
+                <!-- Comments List -->
+                <div class="comments-list" th:if="${comments != null && !comments.isEmpty()}">
+                    <div class="comment" th:each="comment : ${comments}">
+                        <div class="comment-header">
+                            <strong th:text="${comment.user.name}"></strong>
+                            <span class="comment-date" th:text="${#temporals.format(comment.createdAt, 'MMM dd, yyyy')}"></span>
+                        </div>
+                        <p class="comment-message" th:text="${comment.message}"></p>
+                    </div>
+                </div>
+
+                <div th:if="${comments == null || comments.isEmpty()}" class="empty-state">
+                    <p th:text="#{fraud.comments.empty}">No comments yet. Be the first to comment!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

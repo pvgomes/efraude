@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{home.title} + ' - efraude'">Home - efraude</title>
+
+    <meta name="description" th:content="#{home.description}">
+    <link rel="canonical" href="https://efraude.com/">
+
+    <link rel="alternate" hreflang="en" href="https://efraude.com/">
+    <link rel="alternate" hreflang="pt-BR" href="https://efraude.com/">
+
+    <meta property="og:title" th:content="#{home.title}">
+    <meta property="og:description" th:content="#{home.description}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://efraude.com/">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <section class="hero">
+            <h1 th:text="#{home.hero.title}">Report Frauds. Protect Others.</h1>
+            <p th:text="#{home.hero.subtitle}">Help build a safer community by reporting and exposing frauds and scams worldwide</p>
+
+            <div class="hero-actions">
+                <a sec:authorize="isAuthenticated()" th:href="@{/web/frauds/create}" class="btn btn-primary btn-large" th:text="#{home.hero.reportBtn}">Report a Fraud</a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/web/auth/signup}" class="btn btn-primary btn-large" th:text="#{home.hero.signupBtn}">Get Started</a>
+                <a th:href="@{/web/frauds}" class="btn btn-secondary btn-large" th:text="#{home.hero.browseBtn}">Browse Frauds</a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form th:action="@{/web/frauds}" method="get" class="search-form">
+                    <input type="text" name="q" th:placeholder="#{home.search.placeholder}" class="search-input">
+                    <button type="submit" class="btn btn-primary" th:text="#{home.search.button}">Search</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="recent-frauds">
+            <h2 th:text="#{home.recent.title}">Recent Fraud Reports</h2>
+
+            <div class="fraud-grid" th:if="${recentFrauds != null && !recentFrauds.isEmpty()}">
+                <div class="fraud-card" th:each="fraud : ${recentFrauds}">
+                    <div class="fraud-card-header">
+                        <h3><a th:href="@{/web/frauds/{id}-{slug}(id=${fraud.id}, slug=${fraud.slug})}" th:text="${fraud.title}"></a></h3>
+                        <span class="fraud-country" th:text="${fraud.country}"></span>
+                    </div>
+                    <p class="fraud-description" th:text="${#strings.abbreviate(fraud.description, 200)}"></p>
+                    <div class="fraud-meta">
+                        <span class="fraud-date" th:text="${#temporals.format(fraud.createdAt, 'MMM dd, yyyy')}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${recentFrauds == null || recentFrauds.isEmpty()}" class="empty-state">
+                <p th:text="#{home.recent.empty}">No fraud reports yet. Be the first to report!</p>
+            </div>
+
+            <div class="view-all">
+                <a th:href="@{/web/frauds}" class="btn btn-secondary" th:text="#{home.recent.viewAll}">View All Frauds</a>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

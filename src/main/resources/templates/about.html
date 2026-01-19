@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{about.title} + ' - efraude'">About - efraude</title>
+    <meta name="description" th:content="#{about.description}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <div class="about-content">
+            <h1 th:text="#{about.heading}">About efraude</h1>
+
+            <section class="about-section">
+                <h2 th:text="#{about.mission.title}">Our Mission</h2>
+                <p th:text="#{about.mission.content}">
+                    efraude is a community-driven platform dedicated to exposing and preventing fraud worldwide.
+                    We believe that by sharing information about scams and fraudulent activities, we can help
+                    protect others from becoming victims.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2 th:text="#{about.how.title}">How It Works</h2>
+                <div class="how-it-works">
+                    <div class="step">
+                        <h3 th:text="#{about.how.step1.title}">1. Report</h3>
+                        <p th:text="#{about.how.step1.content}">Create an account and report frauds you've encountered or discovered.</p>
+                    </div>
+                    <div class="step">
+                        <h3 th:text="#{about.how.step2.title}">2. Vote</h3>
+                        <p th:text="#{about.how.step2.content}">Community members vote on reports to verify their legitimacy.</p>
+                    </div>
+                    <div class="step">
+                        <h3 th:text="#{about.how.step3.title}">3. Protect</h3>
+                        <p th:text="#{about.how.step3.content}">Help others by sharing knowledge and staying informed about active scams.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2 th:text="#{about.community.title}">Join Our Community</h2>
+                <p th:text="#{about.community.content}">
+                    Together, we can build a safer internet. Sign up today and contribute to the fight against fraud.
+                </p>
+                <a th:href="@{/web/auth/signup}" class="btn btn-primary btn-large" th:text="#{about.community.cta}">Get Started</a>
+            </section>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{auth.resend.title} + ' - efraude'">Resend Confirmation - efraude</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <div class="auth-container">
+            <h1 th:text="#{auth.resend.heading}">Resend Confirmation Email</h1>
+            <p th:text="#{auth.resend.description}">Enter your email address and we'll send you a new confirmation link.</p>
+
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+            <form th:action="@{/web/auth/resend}" method="post" class="auth-form">
+                <div class="form-group">
+                    <label for="email" th:text="#{auth.resend.form.email}">Email</label>
+                    <input type="email" id="email" name="email" required th:placeholder="#{auth.resend.form.emailPlaceholder}">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large btn-block" th:text="#{auth.resend.form.submit}">Resend Email</button>
+            </form>
+
+            <div class="auth-footer">
+                <p><a th:href="@{/web/auth/login}" th:text="#{auth.resend.backToLogin}">Back to Login</a></p>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

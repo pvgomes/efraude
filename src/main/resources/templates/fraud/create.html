@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{fraud.create.title} + ' - efraude'">Report a Fraud - efraude</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <main class="container">
+        <div class="form-container">
+            <h1 th:text="#{fraud.create.heading}">Report a Fraud</h1>
+            <p th:text="#{fraud.create.description}">Help others by sharing information about a fraud or scam you've encountered.</p>
+
+            <form th:action="@{/web/frauds/create}" method="post" class="fraud-form">
+                <div class="form-group">
+                    <label for="title" th:text="#{fraud.create.form.title}">Title *</label>
+                    <input type="text" id="title" name="title" required maxlength="300"
+                           th:placeholder="#{fraud.create.form.titlePlaceholder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="description" th:text="#{fraud.create.form.description}">Description *</label>
+                    <textarea id="description" name="description" required rows="8"
+                              th:placeholder="#{fraud.create.form.descriptionPlaceholder}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="caution" th:text="#{fraud.create.form.caution}">How to Avoid (Optional)</label>
+                    <textarea id="caution" name="caution" rows="5"
+                              th:placeholder="#{fraud.create.form.cautionPlaceholder}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" th:text="#{fraud.create.form.url}">Related URL (Optional)</label>
+                    <input type="url" id="url" name="url" maxlength="2048"
+                           th:placeholder="#{fraud.create.form.urlPlaceholder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="country" th:text="#{fraud.create.form.country}">Country</label>
+                    <select id="country" name="country">
+                        <option value="GLOBAL" th:text="#{fraud.create.form.country.global}">Global</option>
+                        <option value="USA">USA</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="UK">UK</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Other" th:text="#{fraud.create.form.country.other}">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large" th:text="#{fraud.create.form.submit}">Submit Report</button>
+                    <a th:href="@{/web/home}" class="btn btn-secondary" th:text="#{fraud.create.form.cancel}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/footer :: footer}"></div>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

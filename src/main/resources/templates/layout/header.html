@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+    <header th:fragment="header" class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a th:href="@{/web/home}">
+                        <span class="logo-text">efraude</span>
+                    </a>
+                </div>
+
+                <nav class="nav">
+                    <a th:href="@{/web/home}" th:text="#{nav.home}">Home</a>
+                    <a th:href="@{/web/frauds}" th:text="#{nav.frauds}">Frauds</a>
+                    <a th:href="@{/web/about}" th:text="#{nav.about}">About</a>
+
+                    <div sec:authorize="isAuthenticated()">
+                        <a th:href="@{/web/frauds/create}" class="btn btn-primary" th:text="#{nav.report}">Report Fraud</a>
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/web/admin/moderation}" th:text="#{nav.admin}">Admin</a>
+                        <form th:action="@{/web/auth/logout}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-secondary" th:text="#{nav.logout}">Logout</button>
+                        </form>
+                    </div>
+
+                    <div sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/web/auth/login}" class="btn btn-secondary" th:text="#{nav.login}">Login</a>
+                        <a th:href="@{/web/auth/signup}" class="btn btn-primary" th:text="#{nav.signup}">Sign Up</a>
+                    </div>
+
+                    <!-- Language Selector -->
+                    <div class="lang-selector">
+                        <a th:href="@{${#httpServletRequest.requestURI}(lang='en')}" th:class="${#locale.language == 'en' ? 'active' : ''}">EN</a>
+                        <span>|</span>
+                        <a th:href="@{${#httpServletRequest.requestURI}(lang='pt')}" th:class="${#locale.language == 'pt' ? 'active' : ''}">PT</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
