@@ -171,17 +171,17 @@ Fraud no longer in public lists
 
 ```bash
 # Start all services (recommended)
-docker-compose up --build
+docker compose up --build
 
 # View logs
-docker-compose logs -f app
+docker compose logs -f app
 
 # Stop all services
-docker-compose down
+docker compose down
 
 # Rebuild from scratch
-docker-compose down -v
-docker-compose up --build
+docker compose down -v
+docker compose up --build
 
 # Run tests
 mvn test
@@ -360,7 +360,7 @@ FRAUD_MIN_VOTES_THRESHOLD=5
 
 **Run the application:**
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 **Add a new page:**

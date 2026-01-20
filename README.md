@@ -88,7 +88,7 @@ efraude/
 │       ├── css/style.css                  # Application styles
 │       ├── js/app.js                      # Client-side JS
 │       └── robots.txt                     # SEO robots file
-├── docker-compose.yml                     # Local infrastructure
+├── docker-compose.yml                     # Docker Compose configuration
 ├── Dockerfile                             # Application container
 ├── pom.xml                                # Maven dependencies
 └── .env.example                           # Environment template
@@ -357,14 +357,14 @@ Edit CSS variables in `src/main/resources/static/css/style.css`:
 
 ```bash
 # View logs
-docker-compose logs -f app
+docker compose logs -f app
 
 # Restart services
-docker-compose restart
+docker compose restart
 
 # Clean rebuild
-docker-compose down -v
-docker-compose up --build
+docker compose down -v
+docker compose up --build
 ```
 
 ### Email Not Sending
@@ -378,13 +378,13 @@ docker-compose up --build
 
 - Ensure PostgreSQL is running
 - Check `DB_*` environment variables
-- Verify credentials match docker-compose.yml
+- Verify credentials match `docker-compose.yml`
 
 ### Kafka Connection Issues
 
 - Ensure Kafka and Zookeeper are healthy
 - Check `KAFKA_BOOTSTRAP_SERVERS` variable
-- Review docker-compose logs for Kafka
+- Review logs: `docker compose logs kafka`
 
 ## 📝 License
 

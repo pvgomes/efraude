@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+*.iml
+.vscode
+.settings
+.classpath
+.project
+
+# Build artifacts
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Environment files
+.env
+.env.local
+*.env
+
+# Documentation
+README.md
+CONTEXT.md
+*.md
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Other
+*.swp
+*.swo
+*~
